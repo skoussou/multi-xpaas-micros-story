@@ -1,0 +1,171 @@
+<nav-header></nav-header>
+<div class="container-fluid container-cards-pf">
+  <div>
+    <div class="row row-flex row-center row-cards-pf">
+
+      <div class="col-xs-4 col-sm-3 col-lg-2">
+        <div (click)="setStatusFilter('TOTAL')" class="cursor-pointer card-pf card-pf-accented card-pf-aggregate-status card-pf-aggregate-status-mini centre">
+          <h2 class="card-pf-title">
+            <span class="pficon pficon-on"></span>
+            <span *ngIf="kieContainers" class="card-pf-aggregate-status-count">{{runningContainers + failedContainers}}</span>
+            <p>Total</p>
+          </h2>
+        </div>
+      </div>
+
+      <div class="col-xs-4 col-sm-3 col-lg-2">
+        <div (click)="setStatusFilter('STARTED')" class="cursor-pointer card-pf card-pf-accented card-pf-aggregate-status card-pf-aggregate-status-mini">
+          <h2 class="card-pf-title">
+            <span class="pficon pficon-ok"></span>
+            <span class="card-pf-aggregate-status-count">{{runningContainers}}</span>
+            <p>Running</p>
+          </h2>
+        </div>
+      </div>
+
+      <div class="col-xs-4 col-sm-3 col-lg-2">
+        <div (click)="setStatusFilter('FAILED')" class="cursor-pointer card-pf card-pf-accented card-pf-aggregate-status card-pf-aggregate-status-mini">
+          <h2 class="card-pf-title">
+            <span class="pficon pficon-error-circle-o"></span>
+            <span class="card-pf-aggregate-status-count">{{failedContainers}}</span>
+            <p>Failed</p>
+          </h2>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="cards-pf">
+
+  <div class="container-fluid">
+
+    <div class="row toolbar-pf">
+      <div class="col-sm-12">
+        <div class="toolbar-pf-actions">
+
+          <!-- FILTER -->
+          <custom-filter [config]="sortConfig" [filters]="filters" (onChange)="filterChange($event)"></custom-filter>
+
+          <!-- SORT -->
+          <div class="form-group border-left-on">
+            <pfng-sort [config]="sortConfig" (onChange)="sortChange($event)"></pfng-sort>
+          </div>
+
+          <!-- CREATE CONTAINER BUTTON -->
+          <div class="toolbar-pf-action-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary" (click)="openCreateModal()">Create Container &nbsp;
+                <span class="fa fa-plus"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- FILTERS -->
+        <div *ngIf="filters?.length>0" class="row toolbar-pf-results">
+          <div class="col-sm-12">
+            <h5>{{kieContainersFiltered?.length}} Results</h5>
+            <p>Active filters:</p>
+            <ul class="list-inline">
+              <li *ngFor="let filter of filters">
+                <span class="label label-info">
+                  {{filter?.filterType?.title}}: {{filter?.text}} &nbsp;
+                  <span class="pficon pficon-close cursor-pointer" (click)="clearFilter(filter)"></span>
+                </span>
+              </li>
+            </ul>
+            <p *ngIf="filters.length>0" (click)=clearFilters()>
+              <a>Clear All Filters</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CONTAINERS -->
+  <div class="container-fluid container-cards-pf " *ngIf="kieContainers">
+
+    <pfng-pagination *ngIf="kieContainersFiltered.length > 5" [config]='paginationConfig' (onPageSizeChange)="handlePageSize($event)"
+      (onPageNumberChange)="handlePageNumber($event)"></pfng-pagination>
+
+    <div class="row row-cards-pf ">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let kieContainer of kieContainersFiltered 
+      | sortArray: currentSortField.sortField:isAscendingSort
+      | slice:((paginationConfig.pageNumber - 1) * paginationConfig.pageSize):paginationConfig.totalItems
+      | slice:0:paginationConfig.pageSize; let i = index ">
+        <div class="row-height card-pf card-pf-view  ">
+          <div class="card-pf-body">
+            <div class="card-pf-top-element">
+              <span class="pficon pficon-server card-pf-icon-circle"></span>
+            </div>
+            <h2 class="card-pf-title text-center">
+              <Strong>Name: </Strong> {{kieContainer["container-id"]}}
+            </h2>
+            <div class="card-pf-items text-center">
+              <div class="card-pf-item">
+                <span class="pficon pficon-screen"></span>
+                <span class="card-pf-item-text">
+                  <Strong>Status: </Strong> {{kieContainer.status}}</span>
+              </div>
+              <div class="card-pf-item">
+                <span *ngIf="kieContainer.status==='STARTED'" class="pficon pficon-ok"></span>
+                <span *ngIf="kieContainer.status==='FAILED'" class="pficon pficon-error-circle-o"></span>
+              </div>
+            </div>
+            <div class="card-pf-info text-center row top8">
+
+              <strong>Release Info:</strong>
+
+              <br/> </div>
+
+
+            <div class="card-pf-info row  ">
+              <div class="col-xs-4 text-right no-gutter">
+                <strong>Version:</strong>
+              </div>
+              <div class="col-xs-8 no-gutter overflow-hide-x">{{kieContainer["version"] }} </div>
+            </div>
+            <div class="card-pf-info text-left row">
+              <div class="col-xs-4 text-right no-gutter">
+                <strong>Group Id:</strong>
+              </div>
+              <div class="col-xs-8 no-gutter overflow-hide-x">{{kieContainer["group-id"] }} </div>
+            </div>
+            <div class="card-pf-info text-left row">
+              <div class="col-xs-4 text-right no-gutter">
+                <strong>Artifact Id:</strong>
+              </div>
+              <div class="col-xs-8 no-gutter overflow-hide-x">{{kieContainer["artifact-id"] }} </div>
+            </div>
+
+            <div class="card-pf-info row">
+              <div class="cursor-pointer col-xs-4 text-center">
+                <button (click)="gotoDefs(kieContainer['container-id'])" title="View Definitions" [disabled]="kieContainer.status==='FAILED'" class="btn btn-link"  type="button">
+                  <span class="pficon pficon-blueprint"></span>
+                </button>
+              </div>
+              <div class="cursor-pointer col-xs-4 text-center" >
+                <button (click)="gotoProcesses(kieContainer['container-id'])" title="View Processes" [disabled]="kieContainer.status==='FAILED'" class="btn btn-link" type="button">
+                  <span class="pficon pficon-image"></span>
+                </button>
+              </div>
+              <div class="cursor-pointer col-xs-4 text-center">
+                <button class="btn btn-link" title="Delete Container"  type="button" (click)="deleteContainer(kieContainer)">
+                  <span class="pficon pficon-delete"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

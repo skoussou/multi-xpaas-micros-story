@@ -1,0 +1,67 @@
+<nav class="navbar navbar-default navbar-pf row-cards-pf" role="navigation">
+<!--  <div class="container">-->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/dashboard">
+        <!--div class="rh-logo"></div-->
+        <div class="exchange-logo"></div>
+        <!-- <img src="../assets/img/rh-black.png" alt="PatternFly Enterprise Application" /> -->
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1" [ngbCollapse]="isCollapsed">
+      <ul class="nav navbar-nav navbar-utility">
+        <li title="Configure Settings">
+          <a (click)="showSettings()">
+            <span class="fa fa-cog"></span>
+          </a>
+        </li>
+
+
+        <li class="dropdown" dropdown>
+          <a class="dropdown-toggle" data-toggle="dropdown" dropdownToggle>
+            <span class="pficon pficon-user"></span>
+            User: {{user}}
+            <b class="caret"></b>
+          </a>
+
+          <ul class="dropdown-menu drop-down" *dropdownMenu>
+            <li (click)="doLogout()">
+              <span>Logout</span>
+            </li>
+          </ul>
+
+
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-primary">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/dashboard" >Dashboard</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/kie-containers" >Kie-Containers</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/processDefinitions" >Process Defintions</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/processes">Processes</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/payee-details">Add Payee</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/bill-payments">Pay Bill</a>
+        </li>
+
+      </ul>
+    </div>
+<!--  </div>-->
+
+</nav>

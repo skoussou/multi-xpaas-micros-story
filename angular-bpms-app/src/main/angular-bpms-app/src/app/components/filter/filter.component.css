@@ -1,0 +1,18 @@
+
+.sort-pf .btn-link {
+    margin-left: 10px;
+    padding: 4px 0;
+    min-width: 0;
+    color: pink;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.sort-pf .btn-link:hover {
+    margin-left: 10px;
+    padding: 4px 0;
+    min-width: 0;
+    color: yellow;
+    font-size: 16px;
+    line-height: 1;
+}

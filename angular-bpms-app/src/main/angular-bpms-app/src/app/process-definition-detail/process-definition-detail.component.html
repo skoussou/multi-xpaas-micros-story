@@ -1,0 +1,71 @@
+<h3>
+ <strong> Process Defintion Details </strong>
+</h3>
+
+
+<div class="container-fluid ">
+    <div class="row">
+       <div class="col-md-2 text-align-left ">
+            <div >
+                <strong>Process Id:</strong>
+            </div>
+           <div >
+                <strong>Process Name:</strong>
+            </div>
+           <div >
+                <strong>Process Version:</strong>
+            </div>
+              <div >
+                <strong>Process Package:</strong>
+            </div>
+              <div >
+                <strong>Process Container Id:</strong>
+            </div>
+              <div >
+                <strong>Process Variables:</strong>
+            </div>
+            <div >
+                <strong>Process SubProcesses:</strong>
+            </div>
+           <div >
+                <strong>Process Service Tasks:</strong>
+            </div>
+           <div >
+                <strong>Process User Tasks:</strong>
+            </div>
+           
+        </div>
+    
+        <div class="col-md-2">
+            <div >
+               {{processDefinitionDetail['process-id']}}
+            </div>
+            <div >
+               {{processDefinitionDetail['process-name']}}
+            </div>
+             <div>
+               {{processDefinitionDetail['process-version']}}
+            </div>
+            <div>
+               {{processDefinitionDetail['package']}}
+            </div>
+            <div>
+               {{processDefinitionDetail['container-id']}}
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div><img src="../../assets/img/TestProject.simple1-svg.svg">
+             
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!--ul class="heroes">
+  <li *ngFor="let processDefinitionDetails of processDefinitionDetail">
+    <a>
+      <span class="badge">{{processDefinitionDetails['process-id']}}</span> 
+    </a>
+  </li>
+</ul-->

@@ -1,0 +1,113 @@
+import { InMemoryDbService } from 'angular-in-memory-web-api';
+
+export class InMemoryDataService implements InMemoryDbService {
+  createDb() {
+    const kieContainers = {
+        "type" : "SUCCESS",
+        "msg" : "List of created containers",
+        "result" : [
+            {
+                "kie-containers" : {
+                  "kie-container" : [ {
+                    "status" : "STARTED",
+                    "messages" : [ {
+                      "severity" : "INFO",
+                      "timestamp" : 1516398387811,
+                      "content" : [ "Container demoContain2.8 successfully created with module org.sample.bpm:SampleProject:1.0-SNAPSHOT." ]
+                    } ],
+                    "container-id" : "demoContain2.8",
+                    "release-id" : {
+                      "version" : "1.0-SNAPSHOT",
+                      "group-id" : "org.sample.bpm",
+                      "artifact-id" : "SampleProject"
+                    },
+                    "resolved-release-id" : {
+                      "version" : "1.0-SNAPSHOT",
+                      "group-id" : "org.sample.bpm",
+                      "artifact-id" : "SampleProject"
+                    },
+                    "config-items" : [ ]
+                  }, {
+                    "status" : "STARTED",
+                    "messages" : [ {
+                      "severity" : "INFO",
+                      "timestamp" : 1516398414402,
+                      "content" : [ "Container demoContain1.0 successfully created with module org.sample.bpm:SampleProject:1.0-SNAPSHOT." ]
+                    } ],
+                    "container-id" : "demoContain1.0",
+                    "release-id" : {
+                      "version" : "1.0-SNAPSHOT",
+                      "group-id" : "org.sample.bpm",
+                      "artifact-id" : "SampleProject"
+                    },
+                    "resolved-release-id" : {
+                      "version" : "1.0-SNAPSHOT",
+                      "group-id" : "org.sample.bpm",
+                      "artifact-id" : "SampleProject"
+                    },
+                    "config-items" : [ ]
+                  }, {
+                    "status" : "STARTED",
+                    "messages" : [ {
+                      "severity" : "INFO",
+                      "timestamp" : 1516398389426,
+                      "content" : [ "Container mobiledemo1.3.3 successfully created with module com.rh.demo.bpm:ApplicationManagement:1.3-SNAPSHOT." ]
+                    } ],
+                    "container-id" : "mobiledemo1.3.3",
+                    "release-id" : {
+                      "version" : "1.3-SNAPSHOT",
+                      "group-id" : "com.rh.demo.bpm",
+                      "artifact-id" : "ApplicationManagement"
+                    },
+                    "resolved-release-id" : {
+                      "version" : "1.3-SNAPSHOT",
+                      "group-id" : "com.rh.demo.bpm",
+                      "artifact-id" : "ApplicationManagement"
+                    },
+                    "config-items" : [ ]
+                  }, {
+                    "status" : "STARTED",
+                    "messages" : [ {
+                      "severity" : "INFO",
+                      "timestamp" : 1516398314032,
+                      "content" : [ "Container mobiledemo1.3.4 successfully created with module com.rh.demo.bpm:ApplicationManagement:1.3-SNAPSHOT." ]
+                    } ],
+                    "container-id" : "mobiledemo1.3.4",
+                    "release-id" : {
+                      "version" : "1.3-SNAPSHOT",
+                      "group-id" : "com.rh.demo.bpm",
+                      "artifact-id" : "ApplicationManagement"
+                    },
+                    "resolved-release-id" : {
+                      "version" : "1.3-SNAPSHOT",
+                      "group-id" : "com.rh.demo.bpm",
+                      "artifact-id" : "ApplicationManagement"
+                    },
+                    "config-items" : [ ]
+                  }, {
+                    "status" : "STARTED",
+                    "messages" : [ {
+                      "severity" : "INFO",
+                      "timestamp" : 1516398315707,
+                      "content" : [ "Container randomContainer successfully created with module com.rh.demo.bpm:ApplicationManagement:1.3-SNAPSHOT." ]
+                    } ],
+                    "container-id" : "randomContainer",
+                    "release-id" : {
+                      "version" : "1.3-SNAPSHOT",
+                      "group-id" : "com.rh.demo.bpm",
+                      "artifact-id" : "ApplicationManagement"
+                    },
+                    "resolved-release-id" : {
+                      "version" : "1.3-SNAPSHOT",
+                      "group-id" : "com.rh.demo.bpm",
+                      "artifact-id" : "ApplicationManagement"
+                    },
+                    "config-items" : [ ]
+                  } ]
+                }
+              }
+            ]
+        };
+    return {kieContainers};
+  }
+}

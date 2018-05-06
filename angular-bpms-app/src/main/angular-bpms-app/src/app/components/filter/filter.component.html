@@ -1,0 +1,24 @@
+<div class="form-group order-right-off pad-right-0 toolbar-pf-filter">
+    <label class="sr-only" for="filter">Name</label>
+
+    <div class="input-group sort-pf">
+      <div class="input-group-btn btn-group dropdown" dropdown>
+        <button  type="button" class="btn btn-default dropdown-toggle"  aria-haspopup="true"
+          aria-expanded="false" dropdownToggle>{{currentFilterField?.title}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu"  *dropdownMenu>
+          <li role="menuitem" *ngFor="let item of config.fields; let i = index" (click)="selectFilter(i)" [ngClass]="{'selected': item === currentFilterField}">
+            <a class="sortfield sort-field dropdown-item" tabindex="-1" >{{item?.title}}</a>
+          </li>
+        </ul>
+      </div>
+      <input type="text" [(ngModel)]="filterText" class="form-control" id="filter" placeholder="Filter By Name...">
+    </div>
+  </div>
+
+  <!-- SET BUTTON -->
+  <div class="form-group border-left-off margin-left-0 border-left-off pad-left-0">
+    <button type="button" class="btn btn-default" *ngIf="this.filterText" (click)="setFilter()" aria-haspopup="true" aria-expanded="false">Set
+    </button>
+  </div>

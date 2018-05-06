@@ -1,0 +1,22 @@
+<div class="modal-content">
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="modalService.dismiss('cancel')">
+      <span class="pficon pficon-close"></span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Process Details</h4>
+  </div>
+
+  <div class="modal-body">
+    <div class="svg-image">
+      <div class="process-img" aria-label="Process Image" [inlineSVG]="svgUrl"></div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn top-align btn-success" (click)="close()">OK</button>
+  </div>
+
+
+
+</div>

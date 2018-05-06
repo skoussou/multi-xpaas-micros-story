@@ -1,0 +1,30 @@
+.card-pf-aggregate-status-mini {
+    padding-left: 46px
+  }
+  
+  .card-pf-aggregate-status-mini {
+    overflow-x: hidden
+  }
+  
+  .card-pf-info {
+    margin-top: 2px
+  }
+  
+  .row-flex {
+    display: flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  
+  .row-center {
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+  }
+  
+  .row-height {
+    height: 31em;
+  }

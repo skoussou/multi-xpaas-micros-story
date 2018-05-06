@@ -1,0 +1,15 @@
+import { InMemoryDbService } from 'angular-in-memory-web-api';
+
+export class InMemoryDataService implements InMemoryDbService {
+  createDb() {
+    const kieContainers = {
+        "type" : "SUCCESS",
+        "msg" : "List of created containers",
+        "result" : [{a: "12"},
+                    {a: "34"},
+                    {a: "35"}
+            ]         
+        };
+    return {kieContainers};
+  }
+}

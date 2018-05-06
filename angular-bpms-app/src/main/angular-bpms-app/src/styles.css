@@ -1,0 +1,111 @@
+/* You can add global styles to this file, and also import other style files */
+
+.modal-backdrop.fade {
+    opacity: 0.5;
+}
+
+.modal-open .modal {
+    opacity: 1;
+}
+
+.modal-dialog {
+    margin-top: 160px;
+}
+
+.no-gutter {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.top4 {
+    margin-top: 4px !important;
+}
+
+.top6 {
+    margin-top: 6px !important;
+}
+
+.top8 {
+    margin-top: 8px !important;
+}
+
+.pad-left-0 {
+    padding-left: 0 !important;
+}
+
+.pad-right-0 {
+    padding-right: 0 !important;
+}
+
+.pad-top-0 {
+    padding-top: 0 !important;
+}
+
+.margin-top-0 {
+    margin-top: 0 !important;
+}
+
+.margin-left-0 {
+    margin-left: 0 !important;
+}
+
+.overflow-hide-x {
+    overflow-x: hidden;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.border-left-off {
+    border-left: none !important;
+}
+
+.border-right-off {
+    border-right: none !important;
+}
+
+.border-left-on {
+    border-left: 1px solid #d1d1d1 !important;
+    margin-left: 20px;
+}
+
+.top-align {
+    vertical-align: top !important;
+}
+
+.process-details .modal-dialog {
+    width: 94% !important;
+    margin-top: 260px !important;
+}
+
+.navbar-brand img{
+    height: 60px;
+}
+
+.rh-logo {
+    height: 60px;
+    width: 185px;
+    background: url('/assets/img/rh-black.png');
+    background-repeat: no-repeat;
+    background-size: 185px 60px;
+}
+
+.rh-logo {
+    height: 60px;
+    width: 185px;
+    background: url('/assets/img/rh-black.png');
+    background-repeat: no-repeat;
+    background-size: 185px 60px;
+}
+
+.exchange-logo {
+  margin: 20px auto 0;
+  height: 50px;
+  width: 1800px;
+  background: url('/assets/img/UAEXchange-Header.png');
+  background-repeat: no-repeat;
+  background-size: 1800px 50px;
+
+}
+

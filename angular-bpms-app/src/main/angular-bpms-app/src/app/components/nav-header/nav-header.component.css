@@ -1,0 +1,8 @@
+.drop-down {
+    color: white;
+    background-color: black;
+    text-align: right;
+    cursor: pointer;
+    border: none;
+    margin-right: 10px;
+}

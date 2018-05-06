@@ -1,0 +1,126 @@
+<nav-header></nav-header>
+<div class="container-fluid container-cards-pf">
+
+  <div>
+
+<div class="row row-flex row-center row-cards-pf">
+
+  <div *ngFor="let item of summaryData" class="col-xs-6 col-sm-4 col-md-2">
+    <div (click)="setStatusFilter(item)" class="cursor-pointer card-pf card-pf-accented card-pf-aggregate-status card-pf-aggregate-status-mini centre">
+      <h2 class="card-pf-title">
+          <span [class]="item.icon"></span>
+          <span class="card-pf-aggregate-status-count">{{item.value}}</span> 
+          {{item.name}}
+      </h2>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+</div>
+
+
+
+<!-- FILTER -->
+<div class="cards-pf">
+
+  <div class="container-fluid">
+
+    <div class="row toolbar-pf">
+      <div class="col-sm-12">
+        <div class="toolbar-pf-actions">
+
+          <!-- FILTER -->
+          <custom-filter [config]="sortConfig" [filters]="filters" (onChange)="filterChange($event)"></custom-filter>
+
+          <!-- SORT -->
+          <div class="form-group border-left-on">
+            <pfng-sort [config]="sortConfig" (onChange)="sortChange($event)"></pfng-sort>
+          </div>
+
+        </div>
+
+        <!-- FILTERS -->
+        <div *ngIf="filters?.length>0" class="row toolbar-pf-results">
+          <div class="col-sm-12">
+            <h5>{{filteredProcessInstances?.length}} Results</h5>
+            <p>Active filters:</p>
+            <ul class="list-inline">
+              <li *ngFor="let filter of filters">
+                <span class="label label-info">
+                  {{filter?.filterType?.title}}: {{filter?.display ? filter?.display : filter?.text}} &nbsp;
+                  <span class="pficon pficon-close cursor-pointer" (click)="clearFilter(filter)"></span>
+                </span>
+              </li>
+            </ul>
+            <p *ngIf="filters.length>0" (click)=clearFilters()>
+              <a>Clear All Filters</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- /container -->
+<div class="list-group list-view-pf list-view-pf-view">
+
+  <div class="table-responsive-lg">
+    <div class="container-fluid container-cards-pf">
+      <pfng-pagination *ngIf="paginationConfig" [config]='paginationConfig' (onPageSizeChange)="handlePageSize($event)" (onPageNumberChange)="handlePageNumber($event)"></pfng-pagination>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Initiator</th>
+          <th scope="col">Process Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Version</th>
+          <th scope="col">State</th>
+          <th scope="col">Description</th>
+          <th scope="col">Container</th>
+          <th scope="col">Start Date</th>
+          <!-- <th scope="col">Parent Id</th> -->
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="filteredProcessInstances?.length">
+        <tr *ngFor="let processInstance of filteredProcessInstances
+        | sortArray: currentSortField.sortField:isAscendingSort
+        | slice:((paginationConfig.pageNumber - 1) * paginationConfig.pageSize):paginationConfig.totalItems
+        | slice:0:paginationConfig.pageSize; let i = index">
+          <!-- <td>
+            <a routerLink="/processDetail/{{ processInstance['container-id'] }}/{{ processInstance['process-instance-id']}}">{{ processInstance['process-instance-id']}}</a>
+          </td> -->
+          <td>{{ processInstance['process-instance-id'] }}</td>
+          <td>{{ processInstance['initiator'] }}</td>
+          <td>{{ processInstance['process-id'] }}</td>
+          <td>{{ processInstance['process-name'] }}</td>
+          <td>{{ processInstance['process-version'] }}</td>
+          <td>{{ processInstance['process-instance-state'] | processStatus }}</td>
+          <td>{{ processInstance['process-instance-desc'] }}</td>
+          <td>{{ processInstance['container-id'] }}</td>
+          <td>{{ processInstance['start-date'] | date:'short'}}</td>
+          <!-- <td>{{ processInstance['parent-instance-id'] }}</td> -->
+          <td>
+            <div>
+              <button class="btn btn-default" (click)="viewProcessDetails(processInstance)">View Process</button>
+            </div>
+          </td>
+          <td>&nbsp;</td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

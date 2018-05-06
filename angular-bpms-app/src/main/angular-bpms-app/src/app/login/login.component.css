@@ -1,0 +1,56 @@
+.login-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #030303 url(/assets/img/bg-login.jpg) repeat-x 50% 0;
+  background-size: auto;
+}
+
+.login-bg2 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  background-size: auto;
+}
+
+
+
+
+.rh-logo {
+  margin: 20px auto 0;
+  height: 60px;
+  width: 185px;
+  background: url('/assets/img/rh-black.png');
+  background-repeat: no-repeat;
+  background-size: 185px 60px;
+}
+
+.exchange-logo  {
+  margin: 20px auto 0;
+  height: 100px;
+  width: 185px;
+  background: url('/assets/img/uae-exchange-logo.png');
+  background-repeat: no-repeat;
+  background-size: 185px 100px;
+}
+
+.exchange-logo2 {
+  margin: 20px auto 0;
+  height: 50px;
+  width: 700px;
+  background: url('/assets/img/UAEXchange-Header.png');
+  background-repeat: no-repeat;
+  background-size: 700px 50px;
+}
+
+
+footer {
+  min-height:50px;
+  background: url('/assets/img/powered-by-openshift-banner-narrow.png');
+  height: 50px;
+}

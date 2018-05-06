@@ -1,0 +1,79 @@
+<div class="login-pf-page login-bg2">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <header class="login-pf-page-header">
+          <div class="exchange-logo2"></div>
+        </header>
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+            <div class="card-pf">
+              <header class="login-pf-header">
+                <h1>UAE Exchange Bill Payments - Login</h1>
+                <!-- <p>Log in to
+                  <strong>Application</strong>
+                </p> -->
+              </header>
+              <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="form-group" >
+                  <label class="sr-only" for="exampleInputEmail1">Username</label>
+                  <input type="email" class="form-control input-lg" id="exampleInputEmail1" placeholder="Username" formControlName="username">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputPassword1">Password
+                  </label>
+                  <input type="password" class="form-control input-lg" id="exampleInputPassword1" placeholder="Password" formControlName="password">
+                </div>
+                <div class="form-group login-pf-settings">
+                  <label class="checkbox-label">
+                    <!-- <input type="checkbox"> Keep me logged in for 30 days -->
+                  </label>
+                  <a href="#">Forgot password?</a>
+                </div>
+              </form>
+              <button [disabled]="loginForm.invalid"  class="btn btn-primary btn-block btn-lg" (click)="login()">Log In</button>
+          
+              <!-- <p class="login-pf-signup">Need an account?
+                <a href="#">Sign up</a>
+              </p> -->
+            </div>
+            <!-- card -->
+            <footer class="login-pf-page-footer">
+              <!-- <div class="login-pf-page-footer-sso-services">
+                <p>One account for all your company services</p>
+                <ul class="login-pf-page-footer-sso-services-logos">
+                  <li>
+                    <img src="/assets/img/google-drive.svg" alt="google drive icon" />
+                  </li>
+                  <li>
+                    <img src="/assets/img/gmail.svg" alt="gmail icon" />
+                  </li>
+                  <li>
+                    <img src="/assets/img/google-calendar.svg" alt="google calendar icon" />
+                  </li>
+                </ul>
+              </div>
+              <ul class="login-pf-page-footer-links list-unstyled">
+                <li>
+                  <a class="login-pf-page-footer-link" href="#">Terms of Use</a>
+                </li>
+                <li>
+                  <a class="login-pf-page-footer-link" href="#">Help</a>
+                </li>
+                <li>
+                  <a class="login-pf-page-footer-link" href="#">Privacy Policy</a>
+                </li>
+              </ul> -->
+            </footer>
+          </div>
+          <!-- col -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- col -->
+    </div>
+    <!-- login-pf-page -->
+  </div>
+  <!--row-->
+</div>
+<!--container-->

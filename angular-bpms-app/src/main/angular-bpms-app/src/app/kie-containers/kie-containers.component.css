@@ -1,0 +1,107 @@
+/* Kie Container's private CSS styles */
+.kiecontainer {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 25em;
+}
+.kiecontainer li {
+  position: relative;
+  cursor: pointer;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+
+.kiecontainer li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+
+.kiecontainer a {
+  color: #888;
+  text-decoration: none;
+  position: relative;
+  display: block;
+  width: 350px;
+}
+
+.kiecontainer a:hover {
+  color:#607D8B;
+}
+
+.kiecontainer .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #607D8B;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  min-width: 16px;
+  text-align: right;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+.button {
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+  font-family: Arial;
+}
+
+button:hover {
+  background-color: #cfd8dc;
+}
+
+button.delete {
+  position: relative;
+  left: 194px;
+  top: -32px;
+  background-color: gray !important;
+  color: white;
+}
+
+.card-pf-aggregate-status-mini {
+  padding-left: 46px
+}
+
+.card-pf-aggregate-status-mini {
+  overflow-x: hidden
+}
+
+.card-pf-info {
+  margin-top: 2px
+}
+
+.row-flex {
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.row-center {
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+
+.row-height {
+  height: 31em;
+}
+
+
+
