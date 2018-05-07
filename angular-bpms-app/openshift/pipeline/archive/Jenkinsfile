@@ -1,0 +1,264 @@
+node ("maven") {
+
+   // download and configure all common cicd stuff
+   dir('app') {
+
+      // ===============================================================================
+      // SCRIPT Declarations (from OCP 3.6 use the Pipeline BuildConfig ENV Variables)
+      // ===============================================================================
+
+
+      APP_GIT_URL  = "https://gitlab.consulting.redhat.com/sos/isp-processes.git"
+      APP_TEMPLATE = "../openshift/templates/processserver64-mysql-s2i-protected-scm-ocp-no-probe-binary-build.yml"
+      NEXUS_URL = "http://nexus.sos.eu/content/repositories/redhat-internal-dev-demo-release"
+      //NEXUS_URL = "http://nexus.sos.eu/content/groups/redhat-internal"
+      DEV_PROJECT = "sos-online-dev"
+      QA_PROJECT = "sos-online-qa"
+      INT_PROJECT = "sos-online-int"
+      STAGE_PROJECT = "sos-online-stage"
+      PROD_PROJECT = "sos-online-prod"
+      APP_NAME = "kieserver"
+      IMAGESTREAM_PROJECT = "sos-online-dev"
+      CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=sosonlinedoctor=com.sos:sos-online-workflows:1.0.0 -p SOURCE_REPOSITORY_URL=https://gitlab.consulting.redhat.com/sos/isp-processes.git -p HTTPS_PASSWORD=ocppass -p HTTPS_KEYSTORE=sso-https.jks -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR='' -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p REGISTRY=172.30.190.52:5000 -p IMAGESTREAM_PROJECT=sos-online-dev"
+
+//SSO_REALM=sos-online
+//SSO_BEARER_ONLY=true
+//SSO_URL=https://secure-sos-rhsso-1-sos-online-utilities.apps.sos.eu/auth,
+//SSO_DISABLE_SSL_CERTIFICATE_VALIDATION=true
+//APPLICATION_NAME=kieserver,
+//SSO_ENABLE_CORS=true,
+//principal-attribute=preferred_username, 
+//SSO_PUBLIC_KEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmD8e5WncVjRsbmDZV8dzxMFIxeuJhWRjOWbjMo9ipm2Lo8VGd474z6uDg4RiOD7UNKKjYB7ILod7ZKlvCc2YQ+2IphkiTOFEmDjtDED/HzLOaFc8pILDLnBIU0+kH7efS/NIU/mxmEW5aGJY/nevtbbme41icAGeFQjTTO2tbMlTucrn4KG/plYCG56ArPPGSo/DZ7Cbq+X4TU/dXfcrMERCuTv3qzN0uWHWvh1GJDmDnK4TfWIWSZMvMC8I/YPeppDAXtGi1yMnbr0/TEqx1P24AsT6u34qAKOy4q+LvVDbcfofqPMC5DbX9A9oe3sFCUh8k+MbwvyNK2Ya83oLcwIDAQAB)
+
+
+
+      echo '============================================================'
+      echo 'Download SOS Online Processes and ci/cd required files'
+      git branch: "master", credentialsId: "sos-online-utilities-gitlabcredentials", url: "${APP_GIT_URL}"
+
+
+      // load openshift-utils functions (using this path as convention.. define a env var if desired...)
+      openshiftUtils = load 'pipeline/functions/openshift-utils.groovy'
+      // load groovy functions
+      newman = load 'pipeline/functions/newman.groovy'
+      echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+
+   }  
+   // define maven with custom settings.xml (using this path as convention.. define a env var if desired...)in
+   //def mvnCmd = "mvn -s ${WORKSPACE}/cicd/maven/settings.xml" 
+
+
+
+
+   stage("Clone & Build") {
+
+      dir('app') {
+
+         // Get source code from repository
+         //git branch: "master", credentialsId: "sos-online-utilities-gitlabcredentials", url: "${APP_GIT_URL}" 
+         // extract info from pom.xml
+         //def pom = readMavenPom file: "pom.xml"
+         //sh "${mvnCmd} clean package -DskipTests"
+
+        stash name: "app-template", includes: "openshift/templates/processserver64-mysql-s2i-protected-scm-ocp-no-probe-binary-build.yml"
+
+         //dir ('sos-online-processes-technical') {
+           // Deploy the depending of KJAR technical JARs with custom settings.xml pointing to corporate NEXUS
+           //sh "mvn deploy -DskipTests -s ../configuration/settings.xml"
+         //}
+
+
+        //  dir ('sos-online-processes') {
+        //
+        //   // Build, package and test with custom settings.xml pointing to corporate NEXUS
+        //   sh "mvn clean package -s ../configuration/settings.xml"
+        //   //sh "mvn  deploy -Dnexus.url=${NEXUS_URL} -s ../configuration/settings.xml"
+        //
+        // }
+
+	       dir ('sos-online-bpm-parent') {
+	         // Build, package and test with custom settings.xml pointing to corporate NEXUS
+	         sh "mvn clean package -s ../configuration/settings.xml"
+	       }
+      }  
+   }
+
+   stage("Static Test & Analysis") {
+
+      dir('app') {
+
+      }  
+   }
+
+   stage("Push Artifact to Nexus") {
+
+//      dir('app') {
+//         dir ('sos-online-processes') {
+//           echo "Pushing artifact to Nexus ${NEXUS_URL}"
+//
+//
+//           // deploy
+//            //sh "mvn  deploy -Dnexus.url=${NEXUS_URL} -s ../configuration/settings.xml"
+//            //sh "mvn  deploy -s ../configuration/settings.xml"
+//        
+//            // extract info from pom.xml to build NEXUS_ARTIFACT_PATH
+//            def pom = readMavenPom file: "pom.xml"
+//            APP_VERSION = pom.version
+//            def artifactId = pom.artifactId
+//            def groupId = pom.groupId.replace(".","/")
+//            //def packaging = pom.packaging
+//            def packaging = "jar"
+//            
+//            echo "APP_VERSION = ${APP_VERSION}"
+//            echo "artifactId = ${artifactId}"
+//            echo "groupId = ${groupId}"
+//            echo "packaging = ${packaging}"
+//
+//
+//            NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
+//            echo "NEXUS SOS Online Processes Location at ${NEXUS_ARTIFACT_PATH}"
+//
+//
+//         }
+//      }
+
+      dir('app') {
+         dir ('sos-online-bpm-parent') {
+           echo "Pushing artifact to Nexus ${NEXUS_URL}"
+
+
+            // deploy
+            //sh "mvn  deploy -Dnexus.url=${NEXUS_URL} -s ../configuration/settings.xml"
+            //sh "mvn  deploy -s ../configuration/settings.xml"
+        
+            // extract info from pom.xml to build NEXUS_ARTIFACT_PATH
+            def pom = readMavenPom file: "pom.xml"
+            APP_VERSION = pom.version
+            def artifactId = pom.artifactId
+            def groupId = pom.groupId.replace(".","/")
+            //def packaging = pom.packaging
+            def packaging = "jar"
+            
+            echo "APP_VERSION = ${APP_VERSION}"
+            echo "artifactId = ${artifactId}"
+            echo "groupId = ${groupId}"
+            echo "packaging = ${packaging}"
+
+
+            NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
+            echo "NEXUS SOS Online Processes Location at ${NEXUS_ARTIFACT_PATH}"
+
+
+         }
+      }  
+   }
+}
+
+node ("nodejs") {
+   
+   // get app template back
+   unstash "app-template" 
+   
+   stage("Build in Openshift") {
+      
+      dir('app') {
+      // no need to define a cluster if we have just one defined and it is the one where Jenkins is running 
+      openshift.withCluster() { 
+
+//openshift.doAs( 'jenkins' ) {
+          openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
+          //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "http://nexus-sos-online-utilities.apps.sos.eu/nexus/content/repositories/sos-online/${NEXUS_ARTIFACT_PATH}", true) 
+          openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}/${NEXUS_ARTIFACT_PATH}", true) 
+        }
+//}
+      }
+   }
+
+
+   stage("DEPLOY in DEV [${DEV_PROJECT}] ") {
+
+      openshift.withCluster() { 
+         openshiftUtils.deploy("${DEV_PROJECT}", "${APP_NAME}")
+      } 
+   }
+
+   stage("DEPLOY [${QA_PROJECT}] ") {
+
+      //openshift.withCluster() { 
+      //   openshiftUtils.deploy("${QA_PROJECT}", "${APP_NAME}")
+      //}   
+   }
+
+   stage("QA TESTing") {
+
+      echo '-------------'
+      echo ' QA TEST TBD'
+      echo '-------------'
+
+      dir('app') {
+
+      }  
+   }
+
+   stage("DEPLOY in [${INT_PROJECT}] ") {
+
+      //openshift.withCluster() { 
+      //   openshiftUtils.deploy("${INT_PROJECT}", "${APP_NAME}")
+      //}     
+   }
+
+   stage("INT TESTing ") {
+
+
+      echo '-------------'
+      echo ' RUN INT TEST '
+      echo '-------------'
+
+      dir('app') {
+
+      }  
+   }
+
+   stage("DEPLOY in [${STAGE_PROJECT}] ") {
+
+      //openshift.withCluster() { 
+      //   openshiftUtils.deploy("${STAGE_PROJECT}", "${APP_NAME}")
+      //}  
+   }
+
+   stage("RUN PERF TESTting ") {
+
+      echo '-------------'
+      echo ' RUN PERF TEST '
+      echo '-------------'
+
+      dir('app') {
+
+      }  
+   }
+
+   stage("RUN UAT TESTting ") {
+
+      echo '-------------'
+      echo ' RUN UAT TEST '
+      echo '-------------'
+
+      dir('app') {
+
+      }  
+   }
+
+
+
+   stage("DEPLOY in PROD") {
+
+      echo '-------------'
+      echo ' Copy image in PROD Cluster Registry'
+      echo ' Copy image in PROD Namespace'
+      echo '-------------'
+
+      dir('app') {
+
+      }  
+   }
+}
