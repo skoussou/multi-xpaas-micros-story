@@ -76,7 +76,7 @@ node ("maven") {
 	       dir ('angular-bpms-app') {
 	         // Build, package and test with custom settings.xml pointing to corporate NEXUS
 	         //sh "mvn clean package -s ../configuration/settings.xml"
-                   sh "mvn clean package -s"
+                   sh "mvn clean package"
 	       }
       }  
    }
