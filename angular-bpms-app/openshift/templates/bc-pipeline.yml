@@ -8,5 +8,5 @@ spec:
       uri: https://github.com/skoussou/multi-xpaas-micros-story.git
   strategy:
     jenkinsPipelineStrategy:
-      jenkinsfilePath:  angular-bpms-app/pipeline/Jenkinsfile
+      jenkinsfilePath:  angular-bpms-app/openshift/pipeline/Jenkinsfile
 

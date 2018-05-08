@@ -13,6 +13,8 @@ import { KieContainersComponent } from './kie-containers/kie-containers.componen
 import { ProcessesComponent } from './processes/processes.component';
 import { ProcessDetailComponent } from './process-detail/process-detail.component';
 import { ProcessDefinitionsComponent } from './process-definitions/process-definitions.component';
+import { PayeeDetailsComponent } from './payee-details/payee-details.component';
+import { BillPaymentsComponent } from './bill-payments/bill-payments.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
   { path: 'processDefinitions', component: ProcessDefinitionsComponent, canActivate: [AuthGuard] },
   { path: 'process-detail/:id', component: ProcessDetailComponent, canActivate: [AuthGuard] },
+  { path: 'payee-details', component: PayeeDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'bill-payments', component: BillPaymentsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/dashboard' }
 ];
 

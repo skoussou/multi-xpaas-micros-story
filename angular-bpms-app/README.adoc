@@ -1,0 +1,36 @@
+== Pipeline Creation/Deployment
+
+* To gain an understanding of what we are trying to setup and how the configurations work see example setup here: https://gitlab.consulting.redhat.com/sos/cicd-isp
+* Templates at *openshift/templates* and *pipeline* contain the necessary OCP files.
+
+*STEP 1 -* At namespace *poc* Jenkins is running we have added to the the *_jenkins_* openshift service-account the *_edit_*" role towards NAMESPACE *poc* where the application will be deployed in.
+
+----
+$ oc policy add-role-to-user edit system:serviceaccount:sos-online-dev:jenkins -n sos-online-dev
+role "edit" added: "system:serviceaccount:isp-poc:jenkins"
+----
+
+*STEP 2 -* In the *sos-online-utilities* NAMESPACE added SECRET with authentication to GITLAB which will be referenced from:
+   a - BuildConfig in application template
+   b - BuildConfig jenkinspipeline 
+   c - then credentialId inside JENKINS console extracted and added to Jenkinsfile
+
+----
+$ oc secrets new-basicauth gitlabcredentials --username=stkousso --password='gitlab!2017'
+secret/gitlabcredentials
+----
+
+*STEP 3 -* Create Pipeline
+
+You perform the following once, unless you change the SECRETS name or repoistory location (basically any changes to *bc-pipeline.yml*)
+----
+$ oc create -f bc-pipeline.yml 
+----
+ 
+*STEP 4 -* Start the Pipeline
+
+You can change this more frequently until the pipeline will be complete. This retrieved afresh from the repository (as defined at *bc-pipeline.yml*) as code and executed each time the build is initiated
+
+----
+$ oc start-build isp-pipeline
+----
