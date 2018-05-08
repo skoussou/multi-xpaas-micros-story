@@ -1,0 +1,33 @@
+<kie-container container-id="payments"><release-id><group-id>com.redhat.consulting</group-id><artifact-id>test-dm-uae</artifact-id><version>1.0.0</version></release-id></kie-container>
+
+
+curl -X PUT "http://localhost:8080/kie-server/services/rest/server/containers/payments" -H  "accept: application/xml" -H  "content-type: application/xml" -d "<?xml version=\"1.0\" encoding=\"UTF-8\"?><kie-container container-id=\"payments\"><release-id><group-id>com.redhat.consulting</group-id><artifact-id>test-dm-uae</artifact-id><version>1.0.0</version></release-id></kie-container>"
+
+<!--kie-container>
+    <config-items>
+        <itemName>RuntimeStrategy</itemName>
+        <itemValue>SINGLETON</itemValue>
+        <itemType>java.lang.String</itemType>
+    </config-items>
+    <config-items>
+        <itemName>MergeMode</itemName>
+        <itemValue>MERGE_COLLECTIONS</itemValue>
+        <itemType>java.lang.String</itemType>
+    </config-items>
+    <config-items>
+        <itemName>KBase</itemName>
+        <itemValue></itemValue>
+        <itemType>java.lang.String</itemType>
+    </config-items>
+    <config-items>
+        <itemName>KSession</itemName>
+        <itemValue></itemValue>
+        <itemType>java.lang.String</itemType>
+    </config-items>
+    <release-id>
+        <groupId>com.redhat.consulting</groupId>
+        <artifactId>test-dm-uae</artifactId>
+        <version>1.0.0</version>
+    </release-id>
+    <scanner poll-interval="5000" status="STARTED"/>
+</kie-container-->

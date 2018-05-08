@@ -1,0 +1,16 @@
+{
+      "lookup" : null,
+      "commands" : [ {
+        "insert" : {
+          "object" : "testing",
+          "disconnected" : false,
+          "out-identifier" : null,
+          "return-object" : true,
+          "entry-point" : "DEFAULT"
+        }
+
+      }, {
+        "fire-all-rules" : { }
+      } ]
+}
+

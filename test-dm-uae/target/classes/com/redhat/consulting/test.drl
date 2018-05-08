@@ -4,10 +4,11 @@ rule ruletest1
 
 when
 
-true
+eval(true)
 
 then
 
 System.out.println("Test 1 completed");
 
 end
+

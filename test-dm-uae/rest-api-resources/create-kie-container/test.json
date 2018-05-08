@@ -1,0 +1,29 @@
+{
+  "task" : [ {
+    "task-name" : "Approval by PM",
+    "task-priority" : 0,
+    "task-skippable" : false,
+    "associated-entities" : [ "PM" ],
+    "task-inputs" : {
+      "Skippable" : "Object",
+      "TaskName" : "java.lang.String",
+      "GroupId" : "Object"
+    },
+    "task-outputs" : {
+      "_approval" : "Boolean"
+    }
+  }, {
+    "task-name" : "Approval by HR",
+    "task-priority" : 0,
+    "task-skippable" : false,
+    "associated-entities" : [ "HR" ],
+    "task-inputs" : {
+      "Skippable" : "Object",
+      "TaskName" : "java.lang.String",
+      "GroupId" : "Object"
+    },
+    "task-outputs" : {
+      "_approval" : "Boolean"
+    }
+  } ]
+}

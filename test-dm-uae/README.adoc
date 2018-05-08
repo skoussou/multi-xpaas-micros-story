@@ -1,0 +1,3 @@
+
+
+curl -X PUT -u username:password -d test.xml http://localhost:8080/kie-server/server/containers/payments

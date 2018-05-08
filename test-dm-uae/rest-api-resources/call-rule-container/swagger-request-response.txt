@@ -1,0 +1,22 @@
+curl -X POST "http://localhost:8080/kie-server/services/rest/server/containers/instances/payments" -u 'stelios:stelios123!' -H  "accept: application/xml" -H  "content-type: application/json" -d "{      \"lookup\" : null,      \"commands\" : [ {        \"insert\" : {          \"object\" : \"testing\",          \"disconnected\" : false,          \"out-identifier\" : null,          \"return-object\" : true,          \"entry-point\" : \"DEFAULT\"        }      }, {        \"fire-all-rules\" : { }      } ]}"
+
+
+erver response
+Code	Details
+200	
+Response body
+
+{
+  "type" : "SUCCESS",
+  "msg" : "Container payments successfully called.",
+  "result" : {
+    "execution-results" : {
+      "results" : [ ],
+      "facts" : [ ]
+    }
+  }
+}
+
+Response headers
+
+ cache-control: no-cache, no-store, must-revalidate  connection: keep-alive  content-length: 174  content-type: application/xml;charset=UTF-8  date: Tue, 08 May 2018 11:38:13 GMT  expires: 0  pragma: no-cache  server: JBoss-EAP/7  x-kie-conversationid: %2715ad5bfa-7532-3eea-940a-abbbbc89f1e8%27%3A%27payments%27%3A%27com.redhat.consulting%3Atest-dm-uae%3A1.0.0%27%3A%270ae536bb-cc6e-4164-a926-3d60ff60c50b%27  x-powered-by: Undertow/1 

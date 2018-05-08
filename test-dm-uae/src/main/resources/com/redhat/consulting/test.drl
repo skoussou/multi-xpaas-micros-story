@@ -1,0 +1,14 @@
+package com.redhat.consulting.dm_test;
+
+rule ruletest1
+
+when
+
+eval(true)
+
+then
+
+System.out.println("Test 1 completed");
+
+end
+
