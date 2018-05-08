@@ -4,5 +4,7 @@ node('maven') {
      APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
      NPM_EAP_CONTAINER_PATH = "custom-containers/ui-eap-xpaas-npm"
 
+     git branch: "master", url: "${APP_GIT_URL}"
+
    }
 }
