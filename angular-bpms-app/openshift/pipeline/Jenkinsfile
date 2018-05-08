@@ -40,6 +40,8 @@ node ("maven") {
 
        git branch: "master", url: "${APP_GIT_URL}"
 
+       pwd
+
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
       openshiftUtils = load 'angular-bpms-app/pipeline/functions/openshift-utils.groovy'
