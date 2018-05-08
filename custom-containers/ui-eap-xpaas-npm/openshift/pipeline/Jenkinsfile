@@ -1,3 +1,8 @@
 node('maven') {
+   // download and configure all common cicd stuff
+   dir('app') {
+     APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
+     NPM_EAP_CONTAINER_PATH = "custom-containers/ui-eap-xpaas-npm"
 
+   }
 }
