@@ -1,4 +1,4 @@
-node {
+node('maven') {
    // download and configure all common cicd stuff
    dir('app') {
      APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
