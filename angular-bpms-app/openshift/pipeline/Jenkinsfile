@@ -84,14 +84,18 @@ node ("maven") {
         //
         // }
 
-      echo "COMMAND PWD"
-      sh "pwd"
 
-      echo "COMMANDA ls -la"
-      sh "ls -la"
-      //sh "ls angular-bpms-app/openshift/pipeline/functions"
 
 	       dir ('angular-bpms-app') {
+
+                  echo "COMMAND PWD"
+                  sh "pwd"
+
+                  echo "COMMANDA ls -la"
+                  sh "ls -la"
+                  //sh "ls angular-bpms-app/openshift/pipeline/functions"
+                  sh "cat pom.xml"
+
 	         // Build, package and test with custom settings.xml pointing to corporate NEXUS
 	         //sh "mvn clean package -s ../configuration/settings.xml"
                    sh "mvn clean package"
