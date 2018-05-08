@@ -14,14 +14,7 @@ node('maven') {
 
      echo "after git clone"
 
-     echo "This path to find the Dockerfile in: ${NPM_EAP_CONTAINER_PATH}"
 
-     dir (${NPM_EAP_CONTAINER_PATH}) {
-
-       echo "Creating Container Image to include EAP & NPM"
-       echo "docker build -t eap71-openshift-npm:1.0 --rm=true ."
-       sh "docker build -t eap71-openshift-npm:1.0 --rm=true ."
-     } 
 
    stage("Build Image with NPM (Optional)") {
 
