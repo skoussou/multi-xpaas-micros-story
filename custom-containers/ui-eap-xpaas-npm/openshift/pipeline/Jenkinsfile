@@ -7,19 +7,19 @@ node('maven') {
      APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
      NPM_EAP_CONTAINER_PATH = "custom-containers/ui-eap-xpaas-npm"
 
-     echo '============================================================'
+     echo "============================================================"
      echo "before git clone"
 
      git branch: "master", url: "${APP_GIT_URL}"
 
-     echo 'after git clone'
+     echo "after git clone"
 
      echo "This path to find the Dockerfile in: ${NPM_EAP_CONTAINER_PATH}"
 
      dir (${NPM_EAP_CONTAINER_PATH}) {
 
-       echo 'Creating Container Image to include EAP & NPM'
-       echo 'docker build -t eap71-openshift-npm:1.0 --rm=true .'
+       echo "Creating Container Image to include EAP & NPM"
+       echo "docker build -t eap71-openshift-npm:1.0 --rm=true ."
        sh "docker build -t eap71-openshift-npm:1.0 --rm=true ."
      } 
 
