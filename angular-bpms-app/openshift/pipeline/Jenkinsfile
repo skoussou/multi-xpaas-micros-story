@@ -92,7 +92,7 @@ node ("maven") {
                   sh "pwd"
 
                   echo "COMMANDA ls -la"
-                  sh "ls -la"
+                  sh "ls -la src/main/angular-bpms-app/"
                   //sh "ls angular-bpms-app/openshift/pipeline/functions"
                   sh "cat pom.xml"
 
