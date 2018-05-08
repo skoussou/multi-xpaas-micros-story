@@ -6,5 +6,11 @@ node('maven') {
 
      git branch: "master", url: "${APP_GIT_URL}"
 
+     echo "after git clone"
+
+     dir ("${NPM_EAP_CONTAINER_PATH}") {
+
+     }
+
    }
 }
