@@ -1,0 +1,7 @@
+== Data Lake
+
+This will contain instructions on
+
+a) Creating the data lake (perhaps different params for different scenarios
+b) Adding if required server side code/scripts
+
