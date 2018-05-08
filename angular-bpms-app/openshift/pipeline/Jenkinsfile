@@ -40,7 +40,11 @@ node ("maven") {
 
        git branch: "master", url: "${APP_GIT_URL}"
 
-       pwd
+      echo "COMMAND PWD"
+      sh "pwd"
+
+      echo "COMMANDA ls -la"
+      sh "ls -la"
 
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
