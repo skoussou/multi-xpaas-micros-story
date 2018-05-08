@@ -14,11 +14,21 @@ openshift.withCluster() {
 	           if (cmExists) {
 	                cm = cmSelector.object()
 	            } else {
-	                 cm = openshift.create("configmap", "app-config").object()
-	                 cm.data["app-git-url"] = "${APP_GIT_URL}"
-	                 def objs = openshift.create( cm )
+	            	def cmappconfig = [[
+					    "kind": "ConfigMap",
+					    "apiVersion": "v1",
+					    "metadata": [
+					        "name": "app-config"
+					    ],
+					    "data": [
+					        "app-git-url": "${APP_GIT_URL}"
+					    ]
+					]
+                ]    
+                	cm = openshift.create(cmappconfig).object()
+	                 
 	            }
-                
+                 echo 'The CM is ${cm.data["app-git-url"]} objects'
                 
 			   // Mark the code checkout 'stage'....
 			   stage 'Checkout'
