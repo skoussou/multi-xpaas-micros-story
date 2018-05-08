@@ -1,6 +1,6 @@
 node('maven') {
    // Mark the code checkout 'stage'....
-   stage 'Checkout'
+
 
    // download and configure all common cicd stuff
    dir('app') {
@@ -8,7 +8,8 @@ node('maven') {
      APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
      NPM_EAP_CONTAINER_PATH = "custom-containers/ui-eap-xpaas-npm"
 
-     echo 'before git clone'
+     echo '============================================================'
+     echo "before git clone"
 
      git branch: "master", url: "${APP_GIT_URL}"
 
