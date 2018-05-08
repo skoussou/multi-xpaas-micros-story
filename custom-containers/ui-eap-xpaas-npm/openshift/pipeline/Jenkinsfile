@@ -1,0 +1,22 @@
+node('maven') {
+   // Mark the code checkout 'stage'....
+   stage 'Checkout'
+
+   // download and configure all common cicd stuff
+   dir('app') {
+
+     APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
+     NPM_EAP_CONTAINER_PATH = "custom-containers/ui-eap-xpaas-npm"
+
+     git branch: "master", url: "${APP_GIT_URL}"
+
+     echo 'This path to find the Dockerfile in: ${NPM_EAP_CONTAINER_PATH}'
+
+     dir (${NPM_EAP_CONTAINER_PATH}) {
+
+       echo 'Creating Container Image to include EAP & NPM'
+       echo 'docker build -t eap71-openshift-npm:1.0 --rm=true .'
+       sh "docker build -t eap71-openshift-npm:1.0 --rm=true ."
+     } 
+
+}

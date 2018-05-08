@@ -1,0 +1,12 @@
+kind: BuildConfig
+apiVersion: v1
+metadata:
+  name: uae-ui-eap-npm-image-creation-pipeline
+spec:
+  source:
+    git:
+      uri: https://github.com/skoussou/multi-xpaas-micros-story.git
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfilePath:  custom-containers/ui-eap-xpaas-npm/openshift/pipeline/Jenkinsfile
+
