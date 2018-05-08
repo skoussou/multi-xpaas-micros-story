@@ -40,17 +40,20 @@ node ("maven") {
 
        git branch: "master", url: "${APP_GIT_URL}"
 
-      echo "COMMAND PWD"
-      sh "pwd"
+      //echo "COMMAND PWD"
+      //sh "pwd"
 
       echo "COMMANDA ls -la"
-      sh "ls -la"
+      //sh "ls -la"
+      sh "ls angular-bpms-app/openshift/pipeline/functions"
 
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
-      openshiftUtils = load 'angular-bpms-app/pipeline/functions/openshift-utils.groovy'
+      openshiftUtils = load 'angular-bpms-app/openshift/pipeline/functions/openshift-utils.groovy'
+                             
+
       // load groovy functions
-      newman = load 'angular-bpms-app/pipeline/functions/newman.groovy'
+      newman = load 'angular-bpms-app/openshift/pipeline/functions/newman.groovy'
       echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
    }  
