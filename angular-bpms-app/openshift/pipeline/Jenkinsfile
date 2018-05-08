@@ -35,8 +35,10 @@ node ("maven") {
 
 
       echo '============================================================'
-      echo 'Download SOS Online Processes and ci/cd required files'
+      echo 'Download xPAAS apps and ci/cd required files'
       //  git branch: "master", credentialsId: "sos-online-utilities-gitlabcredentials", url: "${APP_GIT_URL}"
+
+       git branch: "master", url: "${APP_GIT_URL}"
 
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
