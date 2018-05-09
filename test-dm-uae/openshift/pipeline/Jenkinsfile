@@ -45,11 +45,11 @@ node ("maven") {
       //sh "pwd"
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
-      openshiftUtils = load "${CONTEXT_PATH}/openshift/pipeline/functions/apply-template.groovy"
+      openshiftUtils = load "test-dm-uae/openshift/pipeline/functions/apply-template.groovy"
                              
 
       // load groovy functions
-      newman = load "${CONTEXT_PATH}/openshift/pipeline/functions/newman.groovy"
+      newman = load "test-dm-uae/openshift/pipeline/functions/newman.groovy"
       echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
    }  
