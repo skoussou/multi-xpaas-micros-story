@@ -36,14 +36,16 @@ node ("maven") {
 
       git branch: "master", url: "${APP_GIT_URL}"
 
-      echo "${CONTEXT_PATH}/openshift/pipeline/functions/openshift-utils.groovy"
+      echo "sh pwd"
+      echo "ls -la"
+      echo "${CONTEXT_PATH}/openshift/pipeline/functions/apply-template.groovy"
 
 
       //echo "COMMAND PWD"
       //sh "pwd"
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
-      openshiftUtils = load "${CONTEXT_PATH}/openshift/pipeline/functions/openshift-utils.groovy"
+      openshiftUtils = load "${CONTEXT_PATH}/openshift/pipeline/functions/apply-template.groovy"
                              
 
       // load groovy functions
