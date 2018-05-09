@@ -137,7 +137,7 @@ def applyTemplate(project, templateFile, appName, appVersion, imageStreamName, c
             //openshift.doAs( 'jenkins' ) {
 
             script {
-                  //openshiftUtils = load "test-dm-uae/openshift/pipeline/functions/openshift-utils.groovy"
+
       
                 //openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                   applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
