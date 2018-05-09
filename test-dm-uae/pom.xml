@@ -18,7 +18,14 @@
     <distributionManagement>
     <repository>
       <id>uae-demo-release</id>
-      <url>${nexus.url}</url>
+            <url>http://10.25.28.72:8081/repository/maven-releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repository>
 
 
