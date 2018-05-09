@@ -61,7 +61,7 @@ node ("maven") {
    //def mvnCmd = "mvn -s ${WORKSPACE}/cicd/maven/settings.xml" 
 
 
-   stage("Clone & Build & Test") {
+   stage("Build & Test") {
 
       dir('app') {
 
@@ -98,12 +98,12 @@ node ("maven") {
    stage("Push Artifact to Nexus") {
 
    }
-
+}
 
 node ("nodejs") {
    
    // get app template back
-   unstash "app-template" 
+   //unstash "app-template" 
    
    stage("Build UAE-PAYMENTS container") {
       
