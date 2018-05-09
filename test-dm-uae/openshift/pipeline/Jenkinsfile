@@ -86,8 +86,7 @@ node ("maven") {
 
 	         // Build, package and test with custom settings.xml pointing to corporate NEXUS
 	         //sh "mvn clean package -s ../configuration/settings.xml"
-                   sh "mvn clean deploy -Dnexus.url=${NEXUS_URL} "
-//-s ./openshift/configuration/settings.xml"
+                   sh "mvn clean deploy -s ./openshift/configuration/settings.xml"
 	       }
       }  
    }
