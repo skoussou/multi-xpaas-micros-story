@@ -113,7 +113,7 @@
         </plugins>
     </build>
 
-    <profiles>
+    <!--profiles>
         <profile>
             <id>default</id>
             <activation>
@@ -131,5 +131,5 @@
                 </plugins>
             </build>
         </profile>
-    </profiles>
+    </profiles-->
 </project>
