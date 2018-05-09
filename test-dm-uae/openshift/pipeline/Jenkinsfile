@@ -97,8 +97,6 @@ node ("maven") {
    }
 }
 
-node ("nodejs") {
-
 def applyTemplate(project, templateFile, appName, appVersion, imageStreamName, customParameters, skipObjects) {
    echo "Applying template ${templateFile} in project ${project}. Application: ${appName}-${appVersion}"
    openshift.withProject( project ) {
@@ -124,6 +122,10 @@ def applyTemplate(project, templateFile, appName, appVersion, imageStreamName, c
       }
    }
 }
+
+node ("nodejs") {
+
+
    
    // get app template back
    //unstash "app-template" 
