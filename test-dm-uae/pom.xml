@@ -25,7 +25,6 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
     </repository>
 
 
