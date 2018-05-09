@@ -6,7 +6,7 @@
       <repositories>
         <repository>
             <id>release</id>
-            <url>http://10.25.28.72:8091/repository/maven-releases</url>
+            <url>http://10.25.28.72:8081/repository/maven-central</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -18,7 +18,7 @@
       <pluginRepositories>
         <pluginRepository>
             <id>nexus-group-plugin-repository</id>
-            <url>http://10.25.28.72:8081/repository/maven-releases</url>
+            <url>http://10.25.28.72:8081/repository/maven-central</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
