@@ -36,8 +36,8 @@ node ("maven") {
 
       git branch: "master", url: "${APP_GIT_URL}"
 
-      echo "sh pwd"
-      echo "ls -la"
+      "sh pwd"
+      "ls -la"
       echo "${CONTEXT_PATH}/openshift/pipeline/functions/apply-template.groovy"
 
 
