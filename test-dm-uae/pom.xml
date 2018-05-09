@@ -14,4 +14,20 @@
       <url>http://localhost:8080/decision-central/maven2/</url>
     </repository>
   </repositories>
+
+    <distributionManagement>
+    <repository>
+      <id>uae-demo-release</id>
+      <url>${nexus.url}</url>
+    </repository>
+
+
+    <!--repository>
+      <id>uae-demo-release</id>
+      <url>http://nexus.sos.eu/content/repositories/redhat-internal-dev-demo-release</url>
+    </repository-->
+
+   
+  </distributionManagement>
+
 </project>
