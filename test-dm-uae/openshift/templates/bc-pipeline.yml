@@ -1,0 +1,12 @@
+kind: BuildConfig
+apiVersion: v1
+metadata:
+  name: uae-payments-rules-pipeline
+spec:
+  source:
+    git:
+      uri: https://github.com/skoussou/multi-xpaas-micros-story.git
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfilePath:  test-dm-uae/openshift/pipeline/Jenkinsfile
+

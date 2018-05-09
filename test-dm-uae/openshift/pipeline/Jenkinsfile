@@ -1,0 +1,134 @@
+node ("maven") {
+
+   // download and configure all common cicd stuff
+   dir('app') {
+
+      // ===============================================================================
+      // SCRIPT Declarations (from OCP 3.6 use the Pipeline BuildConfig ENV Variables)
+      // ===============================================================================
+
+
+      APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
+      CONTEXT_PATH = "test-dm-uae"
+
+      APP_TEMPLATE = "../openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS.yml"
+      NEXUS_URL = "http://10.25.28.72:8091/repository/maven-releases"
+      DEV_PROJECT = "poc"
+
+      APP_NAME = "uae-kie-api"
+      IMAGESTREAM_PROJECT = "poc"
+
+      APP_VERSION=1.0.0
+
+      CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR="test-dm-uae" -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
+
+
+//    NEXUS_URL = "http://nexus.sos.eu/content/repositories/redhat-internal-dev-demo-release"
+
+//      QA_PROJECT = "sos-online-qa"
+//      INT_PROJECT = "sos-online-int"
+//      STAGE_PROJECT = "sos-online-stage"
+//      PROD_PROJECT = "sos-online-prod"
+
+
+
+
+
+
+      echo '============================================================'
+      echo 'Download xPAAS apps and ci/cd required files'
+
+      git branch: "master", url: "${APP_GIT_URL}"
+
+      //echo "COMMAND PWD"
+      //sh "pwd"
+
+      echo "COMMANDA ls -la"
+      //sh "ls -la"
+      sh "ls angular-bpms-app/openshift/pipeline/functions"
+
+
+      // load openshift-utils functions (using this path as convention.. define a env var if desired...)
+      openshiftUtils = load "${CONTEXT_PATH}/openshift/pipeline/functions/openshift-utils.groovy"
+                             
+
+      // load groovy functions
+      newman = load "${CONTEXT_PATH}/openshift/pipeline/functions/newman.groovy"
+      echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+
+   }  
+   // define maven with custom settings.xml (using this path as convention.. define a env var if desired...)in
+   //def mvnCmd = "mvn -s ${WORKSPACE}/cicd/maven/settings.xml" 
+
+
+   stage("Clone & Build & Test") {
+
+      dir('app') {
+
+        //stash name: "app-template", includes: "openshift/templates/processserver64-mysql-s2i-protected-scm-ocp-no-probe-binary-build.yml"
+
+        //  dir ('sos-online-processes') {
+        //
+        //   // Build, package and test with custom settings.xml pointing to corporate NEXUS
+        //   sh "mvn clean package -s ../configuration/settings.xml"
+        //   //sh "mvn  deploy -Dnexus.url=${NEXUS_URL} -s ../configuration/settings.xml"
+        //
+        // }
+
+
+
+	       dir ("${CONTEXT_PATH}") {
+
+                  echo "COMMAND PWD"
+                  sh "pwd"
+
+                  echo "COMMANDA ls -la"
+                  sh "ls -la src/main/angular-bpms-app/"
+                  //sh "ls angular-bpms-app/openshift/pipeline/functions"
+                  sh "cat pom.xml"
+
+	         // Build, package and test with custom settings.xml pointing to corporate NEXUS
+	         //sh "mvn clean package -s ../configuration/settings.xml"
+                   sh "mvn clean install -s ../openshift/configuration/settings.xml"
+	       }
+      }  
+   }
+
+
+   stage("Push Artifact to Nexus") {
+
+   }
+
+
+node ("nodejs") {
+   
+   // get app template back
+   unstash "app-template" 
+   
+   stage("Build UAE-PAYMENTS container") {
+      
+      dir('app') {
+      // no need to define a cluster if we have just one defined and it is the one where Jenkins is running 
+      openshift.withCluster() { 
+
+//openshift.doAs( 'jenkins' ) {
+          openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
+          //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "http://nexus-sos-online-utilities.apps.sos.eu/nexus/content/repositories/sos-online/${NEXUS_ARTIFACT_PATH}", true) 
+          //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}/${NEXUS_ARTIFACT_PATH}", true) 
+        }
+//}
+      }
+   }
+
+
+   //stage("DEPLOY in DEV [${DEV_PROJECT}] ") {
+//
+     // openshift.withCluster() { 
+    //     openshiftUtils.deploy("${DEV_PROJECT}", "${APP_NAME}")
+     // } 
+  // }
+
+
+
+
+}

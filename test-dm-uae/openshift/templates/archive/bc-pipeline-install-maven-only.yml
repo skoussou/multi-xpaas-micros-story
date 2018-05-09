@@ -1,0 +1,14 @@
+kind: BuildConfig
+apiVersion: v1
+metadata:
+  name: isp-pipeline-install-maven-only
+spec:
+  source:
+    git:
+      uri: https://gitlab.consulting.redhat.com/sos/isp-processes.git
+    sourceSecret:
+      name: gitlabcredentials
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: pipeline/Jenkinsfilemaveninstallonly
+
