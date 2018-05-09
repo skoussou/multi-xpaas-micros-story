@@ -8,6 +8,21 @@
   <name>test-dm-uae</name>
   <description></description>
 
+
+      <repositories>
+        <repository>
+            <id>maven-central</id>
+            <url>http://repo1.maven.org/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+      </repositories>
+
+
     <distributionManagement>
     <repository>
       <id>uae-demo-release</id>
