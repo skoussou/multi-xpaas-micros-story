@@ -20,7 +20,7 @@ node ("maven") {
 
       APP_VERSION="1.0.0"
 
-      CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR="test-dm-uae" -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
+      CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
 
 
 //    NEXUS_URL = "http://nexus.sos.eu/content/repositories/redhat-internal-dev-demo-release"
@@ -31,22 +31,16 @@ node ("maven") {
 //      PROD_PROJECT = "sos-online-prod"
 
 
-
-
-
-
       echo '============================================================'
       echo 'Download xPAAS apps and ci/cd required files'
 
       git branch: "master", url: "${APP_GIT_URL}"
 
+      echo "${CONTEXT_PATH}/openshift/pipeline/functions/openshift-utils.groovy"
+
+
       //echo "COMMAND PWD"
       //sh "pwd"
-
-      echo "COMMANDA ls -la"
-      //sh "ls -la"
-      sh "ls angular-bpms-app/openshift/pipeline/functions"
-
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
       openshiftUtils = load "${CONTEXT_PATH}/openshift/pipeline/functions/openshift-utils.groovy"
