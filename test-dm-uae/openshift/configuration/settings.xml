@@ -30,13 +30,14 @@
     </profile>
   </profiles>
 
-  <!--servers>
+
+  <servers>
         <server>
-          <id>redhat-internal-dev-demo-release</id>
-          <username>redhat-dev</username>
-          <password>Kj_289wenJKWJNc=</password>
+          <id>uae-demo-release</id>
+          <username>admin</username>
+          <password>admin123</password>
         </server>
-  </servers-->
+  </servers>
 
 
   <mirrors>
@@ -52,7 +53,7 @@
   <activeProfiles>
 
 
-   <activeProfile>nexus-group</activeProfile>
+   <!--activeProfile>nexus-group</activeProfile-->
 
 
   </activeProfiles>
