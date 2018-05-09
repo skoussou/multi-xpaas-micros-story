@@ -18,7 +18,7 @@ node ("maven") {
       APP_NAME = "uae-kie-api"
       IMAGESTREAM_PROJECT = "poc"
 
-      APP_VERSION=1.0.0
+      APP_VERSION="1.0.0"
 
       CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR="test-dm-uae" -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
 
