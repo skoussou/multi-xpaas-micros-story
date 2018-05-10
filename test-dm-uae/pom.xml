@@ -42,7 +42,7 @@
         <enabled>true</enabled>
       </releases>
       <snapshots>
-        <enabled>false</enable
+        <enabled>false</enable>
       </snapshots>
     </repository>
   </distributionManagement>
