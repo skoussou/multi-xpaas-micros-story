@@ -159,6 +159,7 @@ objects:
         from:
           kind: ImageStream
           name: ${APPLICATION_NAME}
+          namespace: ${IMAGESTREAM_PROJECT}
       type: ImageChange
     - type: ConfigChange
 parameters:
@@ -241,4 +242,8 @@ parameters:
 - description: Container memory limit
   name: MEMORY_LIMIT
   value: 1Gi
+- description: Openshift Namespace where the image will be stored under after build or transfer (in PROD cluster registry)
+  displayName: ImageStream Namespace 
+  name: IMAGESTREAM_PROJECT
+  required: true
 
