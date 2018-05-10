@@ -6,9 +6,42 @@ def applyTemplate(project, templateFile, appName, appVersion, imageStreamName, c
       echo "Additional parameters for template are ${customParameters}"
       def models = openshift.process( readFile(templateFile), "-p APPLICATION_NAME=${appName}", "-p APP_VERSION=${appVersion}", customParameters )
       echo "Discarding objects of type ${skipObjects}"
-
+      for ( o in models ) {
+         // we will discard skipObjects
+         def skip = false
+         for ( skipObject in skipObjects ) {
+           if (o.kind == skipObject) {
+	      skip = true
+	      break
+           }
+         }
+         if (!skip) {
+            echo "Applying changes on ${o.kind}"
+            filterObject(o)
+            def created = openshift.apply(o) 
+           // do we want to show "created"?
+         }
+      }
    }
 
+}
+
+def filterObject(object) {
+   // TODO extend with any possible rule for any object you want
+   if ( object.kind == "DeploymentConfig" ) {
+      filterDeploymentConfig(object)
+   }
+}
+
+
+def filterDeploymentConfig(dc) {
+   echo "Filtering DeploymentConfig ${dc.metadata.name}"
+   def currentDc = openshift.selector("dc", dc.metadata.name)
+   if (currentDc.exists()) {
+      // save current replica number
+      echo "Keeping replica number to ${currentDc.object().spec.replicas}"
+      dc.spec.replicas = currentDc.object().spec.replicas
+   }
 }
 
 return this
