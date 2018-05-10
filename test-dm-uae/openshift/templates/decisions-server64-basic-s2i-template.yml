@@ -23,6 +23,7 @@ objects:
       description: The web server's http port.
     labels:
       application: ${APPLICATION_NAME}
+      version: ${APP_VERSION}
     name: ${APPLICATION_NAME}
   spec:
     ports:
@@ -38,6 +39,7 @@ objects:
       description: Route for application's http service.
     labels:
       application: ${APPLICATION_NAME}
+      version: ${APP_VERSION}
     name: ${APPLICATION_NAME}
   spec:
     host: ${HOSTNAME_HTTP}
@@ -54,6 +56,7 @@ objects:
   metadata:
     labels:
       application: ${APPLICATION_NAME}
+      version: ${APP_VERSION}
     name: ${APPLICATION_NAME}
   spec:
     output:
@@ -158,7 +161,7 @@ objects:
         - ${APPLICATION_NAME}
         from:
           kind: ImageStream
-          name: ${APPLICATION_NAME}
+          name: ${APPLICATION_NAME}:${APP_VERSION}
           namespace: ${IMAGESTREAM_PROJECT}
       type: ImageChange
     - type: ConfigChange
@@ -245,5 +248,9 @@ parameters:
 - description: Openshift Namespace where the image will be stored under after build or transfer (in PROD cluster registry)
   displayName: ImageStream Namespace 
   name: IMAGESTREAM_PROJECT
+  required: true
+- description: Application version used as tag for the image stream
+  displayName: Application version
+  name: APP_VERSION
   required: true
 
