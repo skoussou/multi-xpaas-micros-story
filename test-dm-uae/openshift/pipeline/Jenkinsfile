@@ -48,10 +48,7 @@ node ("maven") {
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
       openshiftUtils = load("test-dm-uae/openshift/pipeline/functions/openshift-utils.groovy")
 
-openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
-
 //        test = load("test-dm-uae/openshift/pipeline/functions/apply-template.groovy") 
-
 //test.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                              
 
@@ -92,7 +89,7 @@ openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}",
 
 	         // Build, package and test with custom settings.xml pointing to corporate NEXUS
 	         //sh "mvn clean package -s ../configuration/settings.xml"
-                   sh "mvn install -s ./openshift/configuration/settings.xml"
+                   sh "mvn deploy -s ./openshift/configuration/settings.xml"
 	       }
       }  
    }
@@ -126,7 +123,7 @@ node ("nodejs") {
 //test.exampleMethod()
 
                 //openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
-     //openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
+     openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                 //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "http://nexus-sos-online-utilities.apps.sos.eu/nexus/content/repositories/sos-online/${NEXUS_ARTIFACT_PATH}", true) 
                 //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}/${NEXUS_ARTIFACT_PATH}", true) 
             //}
