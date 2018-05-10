@@ -12,7 +12,7 @@ node ("maven") {
       APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
       CONTEXT_PATH = "test-dm-uae"
 
-      APP_TEMPLATE = "./openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS.yml"
+      APP_TEMPLATE = "./test-dm-uae/openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS.yml"
       NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases"
       DEV_PROJECT = "poc"
 
