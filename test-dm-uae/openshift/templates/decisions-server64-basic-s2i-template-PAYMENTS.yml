@@ -118,9 +118,9 @@ objects:
           - name: KIE_CONTAINER_DEPLOYMENT
             value: ${KIE_CONTAINER_DEPLOYMENT}
           - name: KIE_SERVER_USER
-            value: ${KIE_SERVER_USER}
+            value: "kieserver"
           - name: KIE_SERVER_PASSWORD
-            value: ${KIE_SERVER_PASSWORD}
+            value: "kieserver123!"
           - name: HORNETQ_CLUSTER_PASSWORD
             value: ${HORNETQ_CLUSTER_PASSWORD}
           - name: HORNETQ_QUEUES
