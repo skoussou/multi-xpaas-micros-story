@@ -65,7 +65,7 @@ node ("maven") {
 
       dir('app') {
 
-        stash name: "app-template", includes: ${APP_TEMPLATE}
+        stash name: "app-template", includes: "test-dm-uae/openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS.yml"
 
         //  dir ('sos-online-processes') {
         //
