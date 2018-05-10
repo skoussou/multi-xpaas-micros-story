@@ -16,14 +16,14 @@ node ("maven") {
       NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases/"
       DEV_PROJECT = "poc"
 
-      APP_NAME = "uae-kie-api"
+      APP_NAME = "uaex-rules-api"
       IMAGESTREAM_PROJECT = "poc"
 
       APP_VERSION="1.0.0"
 
      //CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
 
-CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p IMAGESTREAM_PROJECT=poc"
+CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p IMAGESTREAM_PROJECT=poc -l app=${APP_NAME}"
 
 
 //    NEXUS_URL = "http://nexus.sos.eu/content/repositories/redhat-internal-dev-demo-release"
@@ -63,45 +63,41 @@ CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.co
    //def mvnCmd = "mvn -s ${WORKSPACE}/cicd/maven/settings.xml" 
 
 
-   stage("Build & Test") {
+   stage("Build & Test KJAR") {
 
       dir('app') {
 
-
-
-        //  dir ('sos-online-processes') {
-        //
-        //   // Build, package and test with custom settings.xml pointing to corporate NEXUS
-        //   sh "mvn clean package -s ../configuration/settings.xml"
-        //   //sh "mvn  deploy -Dnexus.url=${NEXUS_URL} -s ../configuration/settings.xml"
-        //
-        // }
-
-
-
-	       dir ("${CONTEXT_PATH}") {
-
-                  echo "COMMAND PWD"
-                  sh "pwd"
-
-                  //echo "COMMANDA ls -la"
-                  //sh "ls -la src/main/angular-bpms-app/"
-                  //sh "ls angular-bpms-app/openshift/pipeline/functions"
-                  //sh "cat pom.xml"
-
-	         // Build, package and test with custom settings.xml pointing to corporate NEXUS
-	         //sh "mvn clean package -s ../configuration/settings.xml"
+          dir ("${CONTEXT_PATH}") {
+	         // Build, package, test and deploy with custom settings.xml pointing to corporate NEXUS
                    sh "mvn deploy -s ./openshift/configuration/settings.xml"
-	       }
 
-        stash name: "app-template", includes: "${APP_TEMPLATE }"
+                 // Capture KJAR GAV Details to use for its download from NEXUS
+                 // extract info from pom.xml to build NEXUS_ARTIFACT_PATH
+
+                 def pom = readMavenPom file: "pom.xml"
+                 APP_VERSION = pom.version
+   
+                 def artifactId = pom.artifactId
+                 def groupId = pom.groupId.replace(".","/")
+  
+                 // removed as in BRMS it is KJAR
+                 //def packaging = pom.packaging
+                 def packaging = "jar"
+            
+                 echo "APP_VERSION = ${APP_VERSION}"
+                 echo "artifactId = ${artifactId}"
+                 echo "groupId = ${groupId}"
+                 echo "packaging = ${packaging}"
+
+  
+                 NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
+                 echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
+          }
+
+          stash name: "app-template", includes: "${APP_TEMPLATE }"
       }  
    }
 
-
-   stage("Push Artifact to Nexus") {
-
-   }
 }
 
 node ("nodejs") {
@@ -111,50 +107,30 @@ node ("nodejs") {
    // get app template back
    unstash "app-template" 
    
-   stage("Build UAE-PAYMENTS container") {
+   stage("Build ${uaex-rules-api} container") {
       
-      //dir('app') {
-
-        //def externalMethod = load("example-functions.groovy") 
-
-        sh "pwd"
-        sh "ls -la"
-        echo "inside test-dm-uae"
-        sh "ls -la ./test-dm-uae/openshift/templates/"
-
         // no need to define a cluster if we have just one defined and it is the one where Jenkins is running 
         openshift.withCluster() { 
 
             //openshift.doAs( 'jenkins' ) {
-
-
-      
-//test.exampleMethod()
-   groupId="com/redhat/consulting"
-   artifactId="test-dm-uae"
-   packaging="jar"
+            groupId="com/redhat/consulting"
+            artifactId="test-dm-uae"
+            packaging="jar"
 
             NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
 
-
-                //openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
      openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
-     openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "http://10.25.28.72:8081/repository/maven-releases/${NEXUS_ARTIFACT_PATH}", true) 
-                //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}/${NEXUS_ARTIFACT_PATH}", true) 
+                //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "http://10.25.28.72:8081/repository/maven-releases/${NEXUS_ARTIFACT_PATH}", true) 
+     openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}/${NEXUS_ARTIFACT_PATH}", true) 
             //}
         }
-      //}
    }
 
 
-   //stage("DEPLOY in DEV [${DEV_PROJECT}] ") {
-//
+   stage("Deploy in ${DEV_PROJECT} ${uaex-rules-api}  ") {
+
      // openshift.withCluster() { 
     //     openshiftUtils.deploy("${DEV_PROJECT}", "${APP_NAME}")
      // } 
-  // }
-
-
-
-
+  }
 }
