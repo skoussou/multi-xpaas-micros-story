@@ -52,12 +52,12 @@
         </server>
   </servers>
 
-  <activeProfiles>
+  <!--activeProfiles>
 
 
    <activeProfile>nexus-group</activeProfile>
 
 
-  </activeProfiles>
+  </activeProfiles-->
 </settings>
 
