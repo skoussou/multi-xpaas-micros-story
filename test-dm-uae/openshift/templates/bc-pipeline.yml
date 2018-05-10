@@ -1,7 +1,7 @@
 kind: BuildConfig
 apiVersion: v1
 metadata:
-  name: uae-payments-rules-pipeline
+  name: uaex-payments-rules-pipeline
 spec:
   source:
     git:
