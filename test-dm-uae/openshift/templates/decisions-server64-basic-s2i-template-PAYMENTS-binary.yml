@@ -75,7 +75,7 @@ objects:
           value: "http://nexus.sos.eu/content/groups/redhat-internal"
         forcePull: true
         from:
-          kind: ImageStreamTaga
+          kind: ImageStreamTag
           name: jboss-decisionserver64-openshift:1.2
           namespace: openshift
       type: Source
