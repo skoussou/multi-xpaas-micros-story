@@ -113,6 +113,11 @@ node ("nodejs") {
 
         //def externalMethod = load("example-functions.groovy") 
 
+        sh "pwd"
+        sh "ls -la"
+        echo "inside test-dm-uae"
+        sh "ls -la ./test-dm-uae/openshift/templates/"
+
         // no need to define a cluster if we have just one defined and it is the one where Jenkins is running 
         openshift.withCluster() { 
 
