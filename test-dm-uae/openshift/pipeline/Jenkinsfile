@@ -51,7 +51,7 @@ node ("maven") {
 
         test = load("test-dm-uae/openshift/pipeline/functions/apply-template.groovy") 
 
-test.applyTemplate()
+test.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                              
 
       // load groovy functions
