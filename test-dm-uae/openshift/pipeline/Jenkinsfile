@@ -65,7 +65,7 @@ node ("maven") {
 
       dir('app') {
 
-        //stash name: "app-template", includes: "openshift/templates/processserver64-mysql-s2i-protected-scm-ocp-no-probe-binary-build.yml"
+        stash name: "app-template", includes: ${APP_TEMPLATE}
 
         //  dir ('sos-online-processes') {
         //
@@ -105,7 +105,7 @@ node ("nodejs") {
 
    
    // get app template back
-   //unstash "app-template" 
+   unstash "app-template" 
    
    stage("Build UAE-PAYMENTS container") {
       
