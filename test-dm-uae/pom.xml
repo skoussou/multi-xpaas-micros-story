@@ -9,7 +9,7 @@
   <description></description>
 
 
-      <repositories>
+      <!--repositories>
         <repository>
             <id>maven-central</id>
             <url>http://repo1.maven.org/maven2/</url>
@@ -32,27 +32,19 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-      </pluginRepositories>
+      </pluginRepositories-->
 
-    <distributionManagement>
+  <distributionManagement>
     <repository>
       <id>uae-demo-release</id>
-            <url>http://10.25.28.72:8081/repository/maven-releases</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+      <url>http://10.25.28.72:8081/repository/maven-releases</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enable
+      </snapshots>
     </repository>
-
-
-    <!--repository>
-      <id>uae-demo-release</id>
-      <url>http://nexus.sos.eu/content/repositories/redhat-internal-dev-demo-release</url>
-    </repository-->
-
-   
   </distributionManagement>
 
 </project>
