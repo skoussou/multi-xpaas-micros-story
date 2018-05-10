@@ -50,6 +50,8 @@ node ("maven") {
 
 
         test = load("test-dm-uae/openshift/pipeline/functions/example-functions.groovy") 
+
+test.exampleMethod()
                              
 
       // load groovy functions
@@ -111,7 +113,7 @@ node ("nodejs") {
       
       dir('app') {
 
-        def externalMethod = load("example-functions.groovy") 
+        //def externalMethod = load("example-functions.groovy") 
 
         // no need to define a cluster if we have just one defined and it is the one where Jenkins is running 
         openshift.withCluster() { 
