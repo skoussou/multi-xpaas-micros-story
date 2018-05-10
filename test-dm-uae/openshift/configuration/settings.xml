@@ -34,14 +34,14 @@
 
 
 
-  <!--mirrors>
+  <mirrors>
     <mirror>
       <id>nexus</id>
       <name>Nexus mirror</name>
-      <url>http://10.25.28.72:8081/repository/maven-central/</url>
+      <url>http://10.25.28.72:8081/repository/maven-public/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
-  </mirrors-->
+  </mirrors>
   
  
   <servers>
@@ -52,12 +52,12 @@
         </server>
   </servers>
 
-  <!--activeProfiles>
+  <activeProfiles>
 
 
    <activeProfile>nexus-group</activeProfile>
 
 
-  </activeProfiles-->
+  </activeProfiles>
 </settings>
 
