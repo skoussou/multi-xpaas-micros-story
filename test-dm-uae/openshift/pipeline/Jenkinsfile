@@ -130,9 +130,9 @@ node ("nodejs") {
 
       
 //test.exampleMethod()
-   groupId= com.redhat.consulting
-   artifactId=test-dm-uae
-   packaging=jar
+   groupId="com.redhat.consulting"
+   artifactId="test-dm-uae"
+   packaging="jar"
 
             NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
 
