@@ -130,7 +130,7 @@ node ("nodejs") {
 
       
 //test.exampleMethod()
-   groupId="com.redhat.consulting"
+   groupId="com/redhat/consulting"
    artifactId="test-dm-uae"
    packaging="jar"
 
