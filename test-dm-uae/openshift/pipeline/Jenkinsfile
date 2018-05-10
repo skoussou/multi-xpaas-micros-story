@@ -46,12 +46,13 @@ node ("maven") {
       //sh "pwd"
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
-      //openshiftUtils = load("test-dm-uae/openshift/pipeline/functions/openshift-utils.groovy")
+      openshiftUtils = load("test-dm-uae/openshift/pipeline/functions/openshift-utils.groovy")
 
+openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
 
-        test = load("test-dm-uae/openshift/pipeline/functions/apply-template.groovy") 
+//        test = load("test-dm-uae/openshift/pipeline/functions/apply-template.groovy") 
 
-test.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
+//test.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                              
 
       // load groovy functions
