@@ -6,7 +6,7 @@
   <artifactId>test-dm-uae</artifactId>
   <version>1.0.0</version>
   <name>test-dm-uae</name>
-  <packaging>kjar</packaging>
+  <!--packaging>kjar</packaging-->
   <description></description>
 
 
