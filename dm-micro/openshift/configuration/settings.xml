@@ -60,6 +60,17 @@
     </profile>
   </profiles>
 
+
+ 
+  <servers>
+        <server>
+          <id>uae-demo-release</id>
+          <username>admin</username>
+          <password>admin123</password>
+        </server>
+  </servers>
+
+
   <activeProfiles>
 
 
