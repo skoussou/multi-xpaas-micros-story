@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redhat.consulting</groupId>
   <artifactId>dm-micro</artifactId>
-  <version>3.0.2</version>
+  <version>3.1.0</version>
   <name>dm-micro</name>
   <!--packaging>kjar</packaging-->
   <description></description>
