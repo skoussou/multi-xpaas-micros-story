@@ -4,9 +4,11 @@ This will contain instructions on
 
 a) Creating the data lake
 
+Note: https://issues.jboss.org/browse/CLOUD-2053 not fixed as at 13/5/2018 and had to use workaround *-e CACHE_NAMES=default,PAYEES,BILLS*
+
 ----
 oc new-app --template=datagrid71-basic -p APPLICATION_NAME=uaex-jdg-data -p INFINISPAN_CONNECTORS=hotrod,rest  \
--e CACHE_NAMES=PAYEES,BILLS \
+-e CACHE_NAMES=default,PAYEES,BILLS \
 -e HOTROD_AUTHENTICATION=true \
 -e CONTAINER_SECURITY_ROLES=admin=ALL \
 -e CONTAINER_SECURITY_ROLE_MAPPER=identity-role-mapper \
