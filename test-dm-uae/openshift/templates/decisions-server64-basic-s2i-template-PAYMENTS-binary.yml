@@ -62,7 +62,7 @@ objects:
     output:
       to:
         kind: ImageStreamTag
-        name: ${APPLICATION_NAME}:1.0.0
+        name: ${APPLICATION_NAME}:${APP_VERSION}
     source:
       binary: {}
       type: Binary

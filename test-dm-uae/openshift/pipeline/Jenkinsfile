@@ -11,23 +11,21 @@ node ("maven") {
 
       APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
       CONTEXT_PATH = "test-dm-uae"
+      
 
       APP_TEMPLATE = "test-dm-uae/openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS-binary.yml"
       NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases/"
-      DEV_PROJECT = "poc"
+
 
       APP_NAME = "uaex-rules-api"
       IMAGESTREAM_PROJECT = "poc"
 
-      APP_VERSION="1.0.0"
+      GROUP_ID = ""
+      ARTIFACT_ID = ""
+      APP_VERSION= ""
+      KIE_CONTAINER_NAME= "payments"
 
-     //CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
-
-CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p IMAGESTREAM_PROJECT=poc -l app=${APP_NAME}"
-
-
-//    NEXUS_URL = "http://nexus.sos.eu/content/repositories/redhat-internal-dev-demo-release"
-
+      DEV_PROJECT = "poc"
 //      QA_PROJECT = "sos-online-qa"
 //      INT_PROJECT = "sos-online-int"
 //      STAGE_PROJECT = "sos-online-stage"
@@ -77,20 +75,20 @@ CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.co
                  def pom = readMavenPom file: "pom.xml"
                  APP_VERSION = pom.version
    
-                 def artifactId = pom.artifactId
-                 def groupId = pom.groupId.replace(".","/")
+                 ARTIFACT_ID = pom.artifactId
+                 GROUP_ID = pom.groupId.replace(".","/")
   
                  // removed as in BRMS it is KJAR
                  //def packaging = pom.packaging
                  def packaging = "jar"
             
                  echo "APP_VERSION = ${APP_VERSION}"
-                 echo "artifactId = ${artifactId}"
-                 echo "groupId = ${groupId}"
+                 echo "ARTIFACT_ID = ${ARTIFACT_ID}"
+                 echo "GROUP_ID = ${GROUP_ID}"
                  echo "packaging = ${packaging}"
 
   
-                 NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
+                 NEXUS_ARTIFACT_PATH = "${GROUP_ID}/${ARTIFACT_ID}/${APP_VERSION}/${ARTIFACT_ID}-${APP_VERSION}.${packaging}"
                  echo "======================================================================================"
                  echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
                  echo "======================================================================================"
@@ -115,14 +113,19 @@ node ("nodejs") {
         openshift.withCluster() { 
 
             //openshift.doAs( 'jenkins' ) {
-            groupId="com/redhat/consulting"
-            artifactId="test-dm-uae"
-            packaging="jar"
+            //groupId="com/redhat/consulting"
+            //artifactId="test-dm-uae"
+            //packaging="jar"
 
-            echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-            NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
-            echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
-            echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            //echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+            //NEXUS_ARTIFACT_PATH = "${GROUP_ID}/${ARTIFACT_ID}/${APP_VERSION}/${ARTIFACT_ID}-${APP_VERSION}.${packaging}"
+            //echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
+            //echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+           //CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
+
+          CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=${KIE_CONTAINER_NAME}=${GROUP_ID}:${ARTIFACT_ID}:${APP_VERSION} -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p IMAGESTREAM_PROJECT=poc -l app=${APP_NAME}"
+
 
      openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                 //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "http://10.25.28.72:8081/repository/maven-releases/${NEXUS_ARTIFACT_PATH}", true) 
