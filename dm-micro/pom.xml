@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redhat.consulting</groupId>
-  <artifactId>test-dm-uae</artifactId>
+  <artifactId>dm-micro</artifactId>
   <version>3.0.2</version>
-  <name>test-dm-uae</name>
+  <name>dm-micro</name>
   <!--packaging>kjar</packaging-->
   <description></description>
 

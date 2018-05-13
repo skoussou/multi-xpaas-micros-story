@@ -10,10 +10,10 @@ node ("maven") {
 
 
       APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
-      CONTEXT_PATH = "test-dm-uae"
+      CONTEXT_PATH = "dm-micro"
       
 
-      APP_TEMPLATE = "test-dm-uae/openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS-binary.yml"
+      APP_TEMPLATE = "dm-micro/openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS-binary.yml"
       NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases/"
 
 
@@ -46,14 +46,14 @@ node ("maven") {
       //sh "pwd"
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
-      openshiftUtils = load("test-dm-uae/openshift/pipeline/functions/openshift-utils.groovy")
+      openshiftUtils = load("dm-micro/openshift/pipeline/functions/openshift-utils.groovy")
 
-//        test = load("test-dm-uae/openshift/pipeline/functions/apply-template.groovy") 
+//        test = load("dm-micro/openshift/pipeline/functions/apply-template.groovy") 
 //test.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                              
 
       // load groovy functions
-     // newman = load "test-dm-uae/openshift/pipeline/functions/openshift-utils.groovy"
+     // newman = load "dm-micro/openshift/pipeline/functions/openshift-utils.groovy"
       echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
    }  
@@ -116,7 +116,7 @@ node ("nodejs") {
 
             //openshift.doAs( 'jenkins' ) {
             //groupId="com/redhat/consulting"
-            //artifactId="test-dm-uae"
+            //artifactId="dm-micro"
             //packaging="jar"
 
             //echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
@@ -124,9 +124,9 @@ node ("nodejs") {
             //echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
             //echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-           //CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:test-dm-uae:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
+           //CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:dm-micro:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=dm-micro -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
 
-          CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=${KIE_CONTAINER_NAME}=${GROUP_ID}:${ARTIFACT_ID}:${APP_VERSION} -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=test-dm-uae -p IMAGESTREAM_PROJECT=poc -l app=${APP_NAME}"
+          CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=${KIE_CONTAINER_NAME}=${GROUP_ID}:${ARTIFACT_ID}:${APP_VERSION} -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=dm-micro -p IMAGESTREAM_PROJECT=poc -l app=${APP_NAME}"
 
 
      openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])

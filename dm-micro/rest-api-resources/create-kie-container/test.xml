@@ -1,7 +1,7 @@
-<kie-container container-id="payments"><release-id><group-id>com.redhat.consulting</group-id><artifact-id>test-dm-uae</artifact-id><version>1.0.0</version></release-id></kie-container>
+<kie-container container-id="payments"><release-id><group-id>com.redhat.consulting</group-id><artifact-id>dm-micro</artifact-id><version>1.0.0</version></release-id></kie-container>
 
 
-curl -X PUT "http://localhost:8080/kie-server/services/rest/server/containers/payments" -H  "accept: application/xml" -H  "content-type: application/xml" -d "<?xml version=\"1.0\" encoding=\"UTF-8\"?><kie-container container-id=\"payments\"><release-id><group-id>com.redhat.consulting</group-id><artifact-id>test-dm-uae</artifact-id><version>1.0.0</version></release-id></kie-container>"
+curl -X PUT "http://localhost:8080/kie-server/services/rest/server/containers/payments" -H  "accept: application/xml" -H  "content-type: application/xml" -d "<?xml version=\"1.0\" encoding=\"UTF-8\"?><kie-container container-id=\"payments\"><release-id><group-id>com.redhat.consulting</group-id><artifact-id>dm-micro</artifact-id><version>1.0.0</version></release-id></kie-container>"
 
 <!--kie-container>
     <config-items>
@@ -26,7 +26,7 @@ curl -X PUT "http://localhost:8080/kie-server/services/rest/server/containers/pa
     </config-items>
     <release-id>
         <groupId>com.redhat.consulting</groupId>
-        <artifactId>test-dm-uae</artifactId>
+        <artifactId>dm-micro</artifactId>
         <version>1.0.0</version>
     </release-id>
     <scanner poll-interval="5000" status="STARTED"/>

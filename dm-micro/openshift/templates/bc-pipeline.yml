@@ -8,5 +8,5 @@ spec:
       uri: https://github.com/skoussou/multi-xpaas-micros-story.git
   strategy:
     jenkinsPipelineStrategy:
-      jenkinsfilePath:  test-dm-uae/openshift/pipeline/Jenkinsfile
+      jenkinsfilePath:  dm-micro/openshift/pipeline/Jenkinsfile
 
