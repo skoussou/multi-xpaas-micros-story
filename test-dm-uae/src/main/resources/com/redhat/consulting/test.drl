@@ -8,7 +8,7 @@ eval(true)
 
 then
 
-System.out.println("Test 1 completed");
+System.out.println("Test 2 completed");
 
 end
 
