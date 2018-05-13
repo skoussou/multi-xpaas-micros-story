@@ -4,6 +4,7 @@ This will contain instructions on
 
 a) Creating the data lake
 
+----
 oc new-app --template=datagrid71-basic -p APPLICATION_NAME=uaex-jdg-data -p INFINISPAN_CONNECTORS=hotrod,rest  \
 -e CACHE_NAMES=PAYEES,BILLS \
 -e HOTROD_AUTHENTICATION=true \
@@ -15,10 +16,11 @@ oc new-app --template=datagrid71-basic -p APPLICATION_NAME=uaex-jdg-data -p INFI
 -e PASSWORD=redhat1! \
 -e ADMIN_GROUP=REST,admin,___schema_manager \
 -l app=uaex-jdg-data
+----
 
-* PAYEES cache
+* PAYEES cache, will contain the payeers cache entries (FORMAT to be defined)
 
-* BILLS cache
+* BILLS cache, will contain the bill payments cache entries (FORMAT to be defined)
 
 
 b) Adding if required server side code/scripts
