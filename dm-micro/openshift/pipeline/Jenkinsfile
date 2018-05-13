@@ -31,7 +31,7 @@ node ("maven") {
 //      STAGE_PROJECT = "sos-online-stage"
 //      PROD_PROJECT = "sos-online-prod"
 
-      SETTINGS_XML_NAME=settings.xml
+      SETTINGS_XML_NAME= "settings.xml"
 
 
       echo '============================================================'
