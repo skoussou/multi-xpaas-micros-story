@@ -76,7 +76,8 @@ node ("maven") {
                  APP_VERSION = pom.version
    
                  ARTIFACT_ID = pom.artifactId
-                 GROUP_ID = pom.groupId.replace(".","/")
+                 GROUP_ID = pom.groupId
+                 def GROUP_ID_PATH = pom.groupId.replace(".","/")
   
                  // removed as in BRMS it is KJAR
                  //def packaging = pom.packaging
@@ -85,10 +86,11 @@ node ("maven") {
                  echo "APP_VERSION = ${APP_VERSION}"
                  echo "ARTIFACT_ID = ${ARTIFACT_ID}"
                  echo "GROUP_ID = ${GROUP_ID}"
+                 echo "GROUP_ID_PATH = ${GROUP_ID_PATH}"
                  echo "packaging = ${packaging}"
 
   
-                 NEXUS_ARTIFACT_PATH = "${GROUP_ID}/${ARTIFACT_ID}/${APP_VERSION}/${ARTIFACT_ID}-${APP_VERSION}.${packaging}"
+                 NEXUS_ARTIFACT_PATH = "${GROUP_ID_PATH}/${ARTIFACT_ID}/${APP_VERSION}/${ARTIFACT_ID}-${APP_VERSION}.${packaging}"
                  echo "======================================================================================"
                  echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
                  echo "======================================================================================"
