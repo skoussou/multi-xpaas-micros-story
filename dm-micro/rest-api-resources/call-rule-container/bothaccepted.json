@@ -1,0 +1,2 @@
+{"commands":[{"insert":{"out-identifier":"PAYMENT_APPROVAL","return-object":true,"entry-point":"DEFAULT","object":{"com.redhat.consulting.domain.InFact":{"paymentValue":990}}}},{"insert":{"out-identifier":"PAYMENT_APPROVAL","return-object":true,"entry-point":"DEFAULT","object":{"com.redhat.consulting.domain.InFact":{"paymentValue":880}}}},{"fire-all-rules":""}]}
+

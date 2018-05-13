@@ -1,15 +1,18 @@
-package com.redhat.consulting.dm_test;
+package com.redhat.consulting;
+
+import java.lang.Double;
+import com.redhat.consulting.domain.InFact;
 
 rule ruletest1
 
 when
 
-eval(true)
+  eval(true)
 
 then
 
-System.out.println("Test 2 completed");
-insert(new String("Test 3 completed"));
+  System.out.println("Test 3 completed");
+  insert(new String("Test 3 completed"));
 
 end
 
