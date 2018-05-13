@@ -109,7 +109,7 @@ node ("nodejs") {
    // get app template back
    unstash "app-template" 
    
-   stage("Build ${APP_NAME} container") {
+   stage("Build Rules container") {
       
         // no need to define a cluster if we have just one defined and it is the one where Jenkins is running 
         openshift.withCluster() { 
@@ -131,7 +131,7 @@ node ("nodejs") {
    }
 
 
-   stage("Deploy in ${DEV_PROJECT} ${APP_NAME}  ") {
+   stage("Deploy Rules ${DEV_PROJECT} Project") {
 
      // openshift.withCluster() { 
     //     openshiftUtils.deploy("${DEV_PROJECT}", "${APP_NAME}")
