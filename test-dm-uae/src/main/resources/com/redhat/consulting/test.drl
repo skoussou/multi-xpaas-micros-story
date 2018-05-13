@@ -9,6 +9,7 @@ eval(true)
 then
 
 System.out.println("Test 2 completed");
+insert(new String("Test 3 completed");
 
 end
 
