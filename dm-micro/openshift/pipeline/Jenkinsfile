@@ -31,6 +31,8 @@ node ("maven") {
 //      STAGE_PROJECT = "sos-online-stage"
 //      PROD_PROJECT = "sos-online-prod"
 
+      SETTINGS_XML_NAME=settings.xml
+
 
       echo '============================================================'
       echo 'Download xPAAS apps and ci/cd required files'
@@ -47,9 +49,6 @@ node ("maven") {
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
       openshiftUtils = load("dm-micro/openshift/pipeline/functions/openshift-utils.groovy")
-
-//        test = load("dm-micro/openshift/pipeline/functions/apply-template.groovy") 
-//test.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                              
 
       // load groovy functions
@@ -57,9 +56,6 @@ node ("maven") {
       echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
    }  
-   // define maven with custom settings.xml (using this path as convention.. define a env var if desired...)in
-   //def mvnCmd = "mvn -s ${WORKSPACE}/cicd/maven/settings.xml" 
-
 
    stage("Build & Test KJAR") {
 
@@ -67,7 +63,7 @@ node ("maven") {
 
           dir ("${CONTEXT_PATH}") {
 	         // Build, package, test and deploy with custom settings.xml pointing to corporate NEXUS
-                   sh "mvn deploy -s ./openshift/configuration/settings.xml"
+                   sh "mvn deploy -s ./openshift/configuration/${SETTINGS_XML_NAME}"
 
                  // Capture KJAR GAV Details to use for its download from NEXUS
                  // extract info from pom.xml to build NEXUS_ARTIFACT_PATH
