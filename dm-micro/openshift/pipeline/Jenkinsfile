@@ -14,8 +14,8 @@ node ("maven") {
       
 
       APP_TEMPLATE = "dm-micro/openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS-binary.yml"
-      NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases/"
-
+      #NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases/"
+      NEXUS_URL = http://nexus-poc.192.168.42.210.nip.io/nexus/content/repositories/releases/
 
       APP_NAME = "uaex-rules-api"
       IMAGESTREAM_PROJECT = "poc"
@@ -126,7 +126,7 @@ node ("nodejs") {
 
 
      openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
-                //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "http://10.25.28.72:8081/repository/maven-releases/${NEXUS_ARTIFACT_PATH}", true) 
+                //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}${NEXUS_ARTIFACT_PATH}", true) 
      openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}${NEXUS_ARTIFACT_PATH}", true) 
             //}
         }
