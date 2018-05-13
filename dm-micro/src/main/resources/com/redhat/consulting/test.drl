@@ -7,7 +7,7 @@ rule ruletest1
 
 when
 
-  eval(true)
+  eval(false)
 
 then
 

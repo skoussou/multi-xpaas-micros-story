@@ -29,6 +29,10 @@ com.redhat.consulting.domain.InFact
   paymentValue : Double,
 }
 
+{
+  results : List<String>
+}
+
 eg.
 curl -X POST http://localhost:8080/kie-server/services/rest/server/containers/instances/payments -u stelios:stelios123! -H accept: application/json -H content-type: application/json -d @URL_TO_/dm-micro/rest-api-resources/call-rule-container/bothaccepted.json
 
