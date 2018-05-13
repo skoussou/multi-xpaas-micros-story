@@ -91,7 +91,9 @@ CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.co
 
   
                  NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
+                 echo "======================================================================================"
                  echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
+                 echo "======================================================================================"
           }
 
           stash name: "app-template", includes: "${APP_TEMPLATE }"
@@ -117,11 +119,13 @@ node ("nodejs") {
             artifactId="test-dm-uae"
             packaging="jar"
 
+            echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
             NEXUS_ARTIFACT_PATH = "${groupId}/${artifactId}/${APP_VERSION}/${artifactId}-${APP_VERSION}.${packaging}"
+            echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
      openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
                 //openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "http://10.25.28.72:8081/repository/maven-releases/${NEXUS_ARTIFACT_PATH}", true) 
-     openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}/${NEXUS_ARTIFACT_PATH}", true) 
+     openshiftUtils.startBuildFromFile("${DEV_PROJECT}", "${APP_NAME}", "${NEXUS_URL}${NEXUS_ARTIFACT_PATH}", true) 
             //}
         }
    }
