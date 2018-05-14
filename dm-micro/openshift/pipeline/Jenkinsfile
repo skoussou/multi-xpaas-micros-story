@@ -10,13 +10,19 @@ node ("maven") {
 
 
       APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
+      APP_GIT_REPO_BRANCH = "master"
       CONTEXT_PATH = "dm-micro"
       
 
       APP_TEMPLATE = "dm-micro/openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS-binary.yml"
+      
       //NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases/"
       NEXUS_URL = "http://nexus-poc.192.168.42.210.nip.io/nexus/content/repositories/releases/"
 
+      //MAVEN_MIRROR_URL = "http://10.25.28.72:8081/repository/maven-public/"
+      MAVEN_MIRROR_URL= "http://nexus-poc.192.168.42.210.nip.io/nexus/content/groups/public/"
+
+ 
       APP_NAME = "uaex-rules-api"
       IMAGESTREAM_PROJECT = "poc"
 
@@ -37,7 +43,7 @@ node ("maven") {
       echo '============================================================'
       echo 'Download xPAAS apps and ci/cd required files'
 
-      git branch: "master", url: "${APP_GIT_URL}"
+      git branch: "${APP_GIT_REPO_BRANCH]", url: "${APP_GIT_URL}"
 
       sh "pwd"
       sh "ls -la"
@@ -122,7 +128,7 @@ node ("nodejs") {
 
            //CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:dm-micro:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=dm-micro -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
 
-          CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=${KIE_CONTAINER_NAME}=${GROUP_ID}:${ARTIFACT_ID}:${APP_VERSION} -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=dm-micro -p IMAGESTREAM_PROJECT=poc -l app=${APP_NAME}"
+          CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=${KIE_CONTAINER_NAME}=${GROUP_ID}:${ARTIFACT_ID}:${APP_VERSION} -p SOURCE_REPOSITORY_URL=${APP_GIT_URL} -p SOURCE_REPOSITORY_REF=${APP_GIT_REPO_BRANCH} -p CONTEXT_DIR=dm-micro -p IMAGESTREAM_PROJECT=poc -p ${MAVEN_MIRROR_URL} -l app=${APP_NAME}"
 
 
      openshiftUtils.applyTemplate("${DEV_PROJECT}", "${APP_TEMPLATE}", "${APP_NAME}", "${APP_VERSION}", "${APP_NAME}", "${CUSTOM_TEMPLATE_PARAMETERS}" , [])
