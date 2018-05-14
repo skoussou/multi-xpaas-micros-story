@@ -43,7 +43,7 @@ node ("maven") {
       echo '============================================================'
       echo 'Download xPAAS apps and ci/cd required files'
 
-      git branch: "${APP_GIT_REPO_BRANCH]", url: "${APP_GIT_URL}"
+      git branch: "${APP_GIT_REPO_BRANCH}", url: "${APP_GIT_URL}"
 
       sh "pwd"
       sh "ls -la"
