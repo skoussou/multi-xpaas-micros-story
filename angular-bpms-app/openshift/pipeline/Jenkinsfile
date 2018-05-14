@@ -1,4 +1,4 @@
-node ("maven") {
+node ("jenkins-slave-nodejs8-maven") {
 
    // download and configure all common cicd stuff
    dir('app') {
@@ -48,43 +48,44 @@ node ("maven") {
    }  
 
 
-   stage("Clone & Build") {
+   stage("Clone & Build Web App") {
 
       dir('app') {
 
-        //stash name: "app-template", includes: "openshift/templates/processserver64-mysql-s2i-protected-scm-ocp-no-probe-binary-build.yml"
+          dir ("${CONTEXT_PATH}") {
+	         // Build, package, test and deploy with custom settings.xml pointing to corporate NEXUS
+                   sh "mvn deploy -s ./openshift/configuration/${SETTINGS_XML_NAME}"
 
-         //dir ('sos-online-processes-technical') {
-           // Deploy the depending of KJAR technical JARs with custom settings.xml pointing to corporate NEXUS
-           //sh "mvn deploy -DskipTests -s ../configuration/settings.xml"
-         //}
+                 // Capture KJAR GAV Details to use for its download from NEXUS
+                 // extract info from pom.xml to build NEXUS_ARTIFACT_PATH
 
+                 def pom = readMavenPom file: "pom.xml"
+                 APP_VERSION = pom.version
+   
+                 ARTIFACT_ID = pom.artifactId
+                 GROUP_ID = pom.groupId
+                 def GROUP_ID_PATH = pom.groupId.replace(".","/")
+  
+                 // removed as in BRMS it is KJAR
+                 def packaging = pom.packaging
+                 //def packaging = "jar"
+            
+                 echo "APP_VERSION = ${APP_VERSION}"
+                 echo "ARTIFACT_ID = ${ARTIFACT_ID}"
+                 echo "GROUP_ID = ${GROUP_ID}"
+                 echo "GROUP_ID_PATH = ${GROUP_ID_PATH}"
+                 echo "packaging = ${packaging}"
 
-        //  dir ('sos-online-processes') {
-        //
-        //   // Build, package and test with custom settings.xml pointing to corporate NEXUS
-        //   sh "mvn clean package -s ../configuration/settings.xml"
-        //   //sh "mvn  deploy -Dnexus.url=${NEXUS_URL} -s ../configuration/settings.xml"
-        //
-        // }
+  
+                 NEXUS_ARTIFACT_PATH = "${GROUP_ID_PATH}/${ARTIFACT_ID}/${APP_VERSION}/${ARTIFACT_ID}-${APP_VERSION}.${packaging}"
+                 echo "======================================================================================"
+                 echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
+                 echo "======================================================================================"
+          }
 
-
-
-	       dir ('angular-bpms-app') {
-
-                  echo "COMMAND PWD"
-                  sh "pwd"
-
-                  echo "COMMANDA ls -la"
-                  sh "ls -la src/main/angular-bpms-app/"
-                  //sh "ls angular-bpms-app/openshift/pipeline/functions"
-                  sh "cat pom.xml"
-
-	         // Build, package and test with custom settings.xml pointing to corporate NEXUS
-	         //sh "mvn clean package -s ../configuration/settings.xml"
-                   sh "mvn clean package"
-	       }
+          stash name: "app-template", includes: "${APP_TEMPLATE }"
       }  
+
    }
 
 
@@ -93,105 +94,7 @@ node ("maven") {
    }
 
 
-node ("nodejs") {
-   
-      echo '-------------'
-      echo ' DEPLOY in DEV'
-      echo '-------------'
 
-      dir('app') {
-
-      } 
-   }
-
-
-   stage("DEPLOY in DEV [${DEV_PROJECT}] ") {
-
-     // openshift.withCluster() { 
-     //    openshiftUtils.deploy("${DEV_PROJECT}", "${APP_NAME}")
-     // } 
-
-      echo '-------------'
-      echo ' DEPLOY in DEV'
-      echo '-------------'
-
-      dir('app') {
-
-      } 
-   }
-
-   stage("QA TESTing") {
-
-      echo '-------------'
-      echo ' QA TEST TBD'
-      echo '-------------'
-
-      dir('app') {
-
-      }  
-   }
-
-   stage("DEPLOY in [${INT_PROJECT}] ") {
-
-      //openshift.withCluster() { 
-      //   openshiftUtils.deploy("${INT_PROJECT}", "${APP_NAME}")
-      //}     
-   }
-
-   stage("INT TESTing ") {
-
-
-      echo '-------------'
-      echo ' RUN INT TEST '
-      echo '-------------'
-
-      dir('app') {
-
-      }  
-   }
-
-   stage("DEPLOY in [${STAGE_PROJECT}] ") {
-
-      //openshift.withCluster() { 
-      //   openshiftUtils.deploy("${STAGE_PROJECT}", "${APP_NAME}")
-      //}  
-   }
-
-   stage("RUN PERF TESTting ") {
-
-      echo '-------------'
-      echo ' RUN PERF TEST '
-      echo '-------------'
-
-      dir('app') {
-
-      }  
-   }
-
-   stage("RUN UAT TESTting ") {
-
-      echo '-------------'
-      echo ' RUN UAT TEST '
-      echo '-------------'
-
-      dir('app') {
-
-      }  
-   }
-
-
-
-   stage("DEPLOY in PROD") {
-
-      echo '-------------'
-      echo ' Copy image in PROD Cluster Registry'
-      echo ' Copy image in PROD Namespace'
-      echo '-------------'
-
-      dir('app') {
-
-      }  
-   }
 
 
 
