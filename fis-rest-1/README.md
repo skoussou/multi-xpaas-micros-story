@@ -30,10 +30,17 @@ Response Body:
 }
 
 ### Build
+To build the whole sample you will need to run the pipeline
+	
+	$ oc create --save-config fis-rest-1-pipeline.yaml
+
+For a full details on promoting API objects have a look on 
+https://docs.openshift.com/container-platform/3.9/dev_guide/application_lifecycle/promoting_applications.html#dev-guide-promoting-applications-importing-api-object-state
+
 
 You can build this example using:
 
-    $ mvn clean install
+    	$ mvn clean install
 
 ### Run
 
