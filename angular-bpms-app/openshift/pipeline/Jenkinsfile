@@ -9,60 +9,44 @@ node ("maven") {
 
 
       APP_GIT_URL  = "https://github.com/skoussou/multi-xpaas-micros-story.git"
+      APP_GIT_REPO_BRANCH = "master"
+      CONTEXT_PATH = "angular-bpms-app"
+
+      APP_TEMPLATE = "../openshift/templates/eap-ui-web-angular-template.yml"
+
+      //MAVEN_MIRROR_URL = "http://10.25.28.72:8081/repository/maven-public/"
+      NEXUS_URL = "http://nexus-poc.192.168.42.210.nip.io/nexus/content/repositories/releases/"
+
+      APP_NAME = "uaex-payments-ui"
+      IMAGESTREAM_PROJECT = "poc"
+
+      DEV_PROJECT = "poc"
+//      QA_PROJECT = "sos-online-qa"
+//      INT_PROJECT = "sos-online-int"
+//      STAGE_PROJECT = "sos-online-stage"
+//      PROD_PROJECT = "sos-online-prod"
+
+      SETTINGS_XML_NAME= "settings.xml"
 
 
-      APP_TEMPLATE = "../openshift/templates/processserver64-mysql-s2i-protected-scm-ocp-no-probe-binary-build.yml"
-      NEXUS_URL = "http://nexus.sos.eu/content/repositories/redhat-internal-dev-demo-release"
-      //NEXUS_URL = "http://nexus.sos.eu/content/groups/redhat-internal"
-      DEV_PROJECT = "sos-online-dev"
-      QA_PROJECT = "sos-online-qa"
-      INT_PROJECT = "sos-online-int"
-      STAGE_PROJECT = "sos-online-stage"
-      PROD_PROJECT = "sos-online-prod"
-      APP_NAME = "kieserver"
-      IMAGESTREAM_PROJECT = "sos-online-dev"
-      CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=sosonlinedoctor=com.sos:sos-online-workflows:1.0.0 -p SOURCE_REPOSITORY_URL=https://gitlab.consulting.redhat.com/sos/isp-processes.git -p HTTPS_PASSWORD=ocppass -p HTTPS_KEYSTORE=sso-https.jks -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR='' -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p REGISTRY=172.30.190.52:5000 -p IMAGESTREAM_PROJECT=sos-online-dev"
-
-//SSO_REALM=sos-online
-//SSO_BEARER_ONLY=true
-//SSO_URL=https://secure-sos-rhsso-1-sos-online-utilities.apps.sos.eu/auth,
-//SSO_DISABLE_SSL_CERTIFICATE_VALIDATION=true
-//APPLICATION_NAME=kieserver,
-//SSO_ENABLE_CORS=true,
-//principal-attribute=preferred_username, 
-//SSO_PUBLIC_KEY=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmD8e5WncVjRsbmDZV8dzxMFIxeuJhWRjOWbjMo9ipm2Lo8VGd474z6uDg4RiOD7UNKKjYB7ILod7ZKlvCc2YQ+2IphkiTOFEmDjtDED/HzLOaFc8pILDLnBIU0+kH7efS/NIU/mxmEW5aGJY/nevtbbme41icAGeFQjTTO2tbMlTucrn4KG/plYCG56ArPPGSo/DZ7Cbq+X4TU/dXfcrMERCuTv3qzN0uWHWvh1GJDmDnK4TfWIWSZMvMC8I/YPeppDAXtGi1yMnbr0/TEqx1P24AsT6u34qAKOy4q+LvVDbcfofqPMC5DbX9A9oe3sFCUh8k+MbwvyNK2Ya83oLcwIDAQAB)
-
+      CUSTOM_TEMPLATE_PARAMETERS = "-p SOURCE_REPOSITORY_URL=${APP_GIT_URL} -p SOURCE_REPOSITORY_REF=${APP_GIT_REPO_BRANCH} -p CONTEXT_DIR=${CONTEXT_PATH} -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p REGISTRY=172.30.190.52:5000 -p IMAGESTREAM_PROJECT=sos-online-dev"
 
 
       echo '============================================================'
       echo 'Download xPAAS apps and ci/cd required files'
-      //  git branch: "master", credentialsId: "sos-online-utilities-gitlabcredentials", url: "${APP_GIT_URL}"
 
-       git branch: "master", url: "${APP_GIT_URL}"
-
-      //echo "COMMAND PWD"
-      //sh "pwd"
-
-      echo "COMMANDA ls -la"
-      //sh "ls -la"
-      sh "ls angular-bpms-app/openshift/pipeline/functions"
-
+      git branch: "${APP_GIT_REPO_BRANCH}", url: "${APP_GIT_URL}"
 
       // load openshift-utils functions (using this path as convention.. define a env var if desired...)
-      openshiftUtils = load 'angular-bpms-app/openshift/pipeline/functions/openshift-utils.groovy'
+      openshiftUtils = load("dm-micro/openshift/pipeline/functions/openshift-utils.groovy")
                              
 
       // load groovy functions
-      newman = load 'angular-bpms-app/openshift/pipeline/functions/newman.groovy'
+     // newman = load "dm-micro/openshift/pipeline/functions/openshift-utils.groovy"
       echo '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
 
    }  
-   // define maven with custom settings.xml (using this path as convention.. define a env var if desired...)in
-   //def mvnCmd = "mvn -s ${WORKSPACE}/cicd/maven/settings.xml" 
 
-   stage("Build Image with NPM (Optional)") {
-
-   }
 
    stage("Clone & Build") {
 

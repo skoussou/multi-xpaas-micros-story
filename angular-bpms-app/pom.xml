@@ -50,49 +50,26 @@
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
-
-
-
-    <!--profiles>
+    <profiles>
         <profile>
             <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <build>	
+            <build>
+                <!-- Maven will append the version to the finalName (which is the name 
+                given to the generated war, and hence the context root) -->
+                <finalName>${project.artifactId}</finalName>
                 <plugins>
                     <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${version.surefire.plugin}</version>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>${version.war.plugin}</version>
                         <configuration>
-                            <skip>true</skip>
+                            <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
+                            <failOnMissingWebXml>false</failOnMissingWebXml>
                         </configuration>
                     </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles-->
-
-    <profiles>
-        <profile>
-            <id>openshift</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-    <build>
-        <!-- Maven will append the version to the finalName (which is the name 
-            given to the generated war, and hence the context root) -->
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.war.plugin}</version>
-                <configuration>
-                    <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-            <plugin>
+                    <plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-compiler-plugin</artifactId>
 		        <version>${version.compiler.plugin}</version>
@@ -141,8 +118,7 @@
         </plugins>
     </build>
         </profile>
+
     </profiles>
-
-
 
 </project>
