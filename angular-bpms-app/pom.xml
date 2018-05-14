@@ -22,7 +22,7 @@
 
     <groupId>org.redhat.bpm</groupId>
     <artifactId>kie-management</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>war</packaging>
     <name>KIE Management UI</name>
     <description>Angular 2 based Management UI for JBoss BPM 6 KIE Server</description>
