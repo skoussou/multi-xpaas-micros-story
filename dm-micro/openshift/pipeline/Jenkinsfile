@@ -16,11 +16,11 @@ node ("maven") {
 
       APP_TEMPLATE = "dm-micro/openshift/templates/decisions-server64-basic-s2i-template-PAYMENTS-binary.yml"
       
-      //NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases/"
-      NEXUS_URL = "http://nexus-poc.192.168.42.210.nip.io/nexus/content/repositories/releases/"
+      NEXUS_URL = "http://10.25.28.72:8081/repository/maven-releases/"
+      //NEXUS_URL = "http://nexus-poc.192.168.42.210.nip.io/nexus/content/repositories/releases/"
 
-      //MAVEN_MIRROR_URL = "http://10.25.28.72:8081/repository/maven-public/"
-      MAVEN_MIRROR_URL= "http://nexus-poc.192.168.42.210.nip.io/nexus/content/groups/public/"
+      MAVEN_MIRROR_URL = "http://10.25.28.72:8081/repository/maven-public/"
+      //MAVEN_MIRROR_URL= "http://nexus-poc.192.168.42.210.nip.io/nexus/content/groups/public/"
 
  
       APP_NAME = "uaex-rules-api"
@@ -116,17 +116,10 @@ node ("nodejs") {
         // no need to define a cluster if we have just one defined and it is the one where Jenkins is running 
         openshift.withCluster() { 
 
-            //openshift.doAs( 'jenkins' ) {
-            //groupId="com/redhat/consulting"
-            //artifactId="dm-micro"
-            //packaging="jar"
-
             //echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
             //NEXUS_ARTIFACT_PATH = "${GROUP_ID}/${ARTIFACT_ID}/${APP_VERSION}/${ARTIFACT_ID}-${APP_VERSION}.${packaging}"
             //echo "NEXUS ${APP_NAME} ARTFIFACT Location at ${NEXUS_ARTIFACT_PATH}"
             //echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-
-           //CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=payments=com.redhat.consulting:dm-micro:1.0.0 -p SOURCE_REPOSITORY_URL=https://github.com/skoussou/multi-xpaas-micros-story.git -p SOURCE_REPOSITORY_REF=master -p CONTEXT_DIR=dm-micro -p appargs=kie.maven.settings.custom=${NEXUS_URL} -p IMAGESTREAM_PROJECT=poc"
 
           CUSTOM_TEMPLATE_PARAMETERS = "-p KIE_CONTAINER_DEPLOYMENT=${KIE_CONTAINER_NAME}=${GROUP_ID}:${ARTIFACT_ID}:${APP_VERSION} -p SOURCE_REPOSITORY_URL=${APP_GIT_URL} -p SOURCE_REPOSITORY_REF=${APP_GIT_REPO_BRANCH} -p CONTEXT_DIR=dm-micro -p IMAGESTREAM_PROJECT=poc -p MAVEN_MIRROR_URL=${MAVEN_MIRROR_URL} -l app=${APP_NAME}"
 
