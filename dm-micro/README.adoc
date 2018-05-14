@@ -1,5 +1,42 @@
 = Rules Micro
 
+== Build & Test OCP
+* Create pipeline build, use (link:https://github.com/skoussou/multi-xpaas-micros-story/tree/master/dm-micro/openshift/templates/bc-pipeline.yml [bc-pipeline.yml] )
+----
+$ oc create -f ./openshift/templates/bc-pipeline.yml
+----
+
+* Start build (pre-requisite in your OCP Cluster a jenkins image). This would take care of building KJAR, testing, creating image, deploying image container
+----
+$ oc start-build uaex-payments-rules-pipeline
+----
+
+* Check containers
+----
+./URL_TO_dm_micro/rest-api-resources/create-kie-container/ocp-find-containers-64-rest-api.sh
+----
+
+* Call Rule at OCP KieContainer: _payments_ (link:https://github.com/skoussou/multi-xpaas-micros-story/tree/master/dm-micro/rest-api-resources/ocp-call-rule-container/run-rule.sh[see ocp-run-rule.sh script] )
+----
+curl -X POST -u username:password -d test.xml OCP_SERVICE_URL/kie-server/server/containers/payments
+com.redhat.consulting.domain.InFact
+{
+  paymentValue : Double,
+}
+
+{
+  results : List<String>
+}
+
+eg.
+curl -X POST OCP_SERVICE_URL/kie-server/services/rest/server/containers/instances/payments -u stelios:stelios123! -H accept: application/json -H content-type: application/json -d @URL_TO_/dm-micro/rest-api-resources/call-rule-container/bothaccepted.json
+
+curl -X POST OCP_SERVICE_URL/kie-server/services/rest/server/containers/instances/payments -u stelios:stelios123! -H accept: application/json -H content-type: application/json -d @URL_TO_/dm-micro/rest-api-resources/call-rule-container/bothrejected.json
+
+curl -X POST OCP_SERVICE_URL/kie-server/services/rest/server/containers/instances/payments -u stelios:stelios123! -H accept: application/json -H content-type: application/json -d @URL_TO_/dm-micro/rest-api-resources/call-rule-container/oneandone.json
+----
+
+
 == Build & Test Locally
 * Build
 ----
@@ -40,3 +77,5 @@ curl -X POST http://localhost:8080/kie-server/services/rest/server/containers/in
 
 curl -X POST http://localhost:8080/kie-server/services/rest/server/containers/instances/payments -u stelios:stelios123! -H accept: application/json -H content-type: application/json -d @URL_TO_/dm-micro/rest-api-resources/call-rule-container/oneandone.json
 ----
+
+
