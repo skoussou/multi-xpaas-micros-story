@@ -15,22 +15,39 @@
  */
 package com.rahmed.redhat.demo.rest;
 
-public class Payee {
+import java.io.Serializable;
 
-	private int id;
+import org.infinispan.protostream.annotations.ProtoField;
+import org.infinispan.protostream.annotations.ProtoMessage;
+
+import io.swagger.annotations.ApiModelProperty;
+
+import org.infinispan.protostream.UnknownFieldSet;
+
+
+//@ProtoMessage(name = "Payee")
+public class Payee implements Serializable {
+
+	private Integer id;
 	private String name;
 	private String bankName;
 	private String accountNumber;
-	private boolean processed;
 
-	public int getId() {
+	@ApiModelProperty(required = false, hidden = true)
+	private UnknownFieldSet unknownFieldSet;
+
+	// @ProtoDoc("@IndexedField(index = true, store = false)")
+	//@ProtoField(number = 1)
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	// @ProtoDoc("@IndexedField(index = true, store = false)")
+	//@ProtoField(number = 2)
 	public String getName() {
 		return name;
 	}
@@ -39,6 +56,8 @@ public class Payee {
 		this.name = payeeName;
 	}
 
+	// @ProtoDoc("@IndexedField(index = true, store = false)")
+	//@ProtoField(number = 3)
 	public String getBankName() {
 		return bankName;
 	}
@@ -47,6 +66,8 @@ public class Payee {
 		this.bankName = bankName;
 	}
 
+	// @ProtoDoc("@IndexedField(index = true, store = false)")
+	//@ProtoField(number = 4)
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -55,12 +76,18 @@ public class Payee {
 		this.accountNumber = accountNumber;
 	}
 
-	public boolean isProcessed() {
-		return processed;
+	public UnknownFieldSet getUnknownFieldSet() {
+		return unknownFieldSet;
 	}
 
-	public void setProcessed(boolean processed) {
-		this.processed = processed;
+	public void setUnknownFieldSet(UnknownFieldSet unknownFieldSet) {
+		this.unknownFieldSet = unknownFieldSet;
 	}
 
+	@Override
+	public String toString() {
+
+		return "[id=" + id + "," + ", name=" + name + ", bankName=" + bankName + ", accountNumber=" + accountNumber
+				+ "]";
+	}
 }
