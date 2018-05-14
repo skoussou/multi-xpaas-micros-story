@@ -1,4 +1,4 @@
-node ("jenkins-slave-nodejs8-maven") {
+node ("jenkins-slave-base-centos7") {
 
    // download and configure all common cicd stuff
    dir('app') {
