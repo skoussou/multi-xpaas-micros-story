@@ -39,9 +39,9 @@
     <repository>
       <id>uae-demo-release</id>
       <!-- Local Distribution-->
-      <url>http://nexus-poc.192.168.42.210.nip.io/nexus/content/repositories/releases/</url>
-      <!-- OCP Distribution
-      <url>http://10.25.28.72:8081/repository/maven-releases/</url>-->
+      <!--url>http://nexus-poc.192.168.42.210.nip.io/nexus/content/repositories/releases/</url-->
+      <!-- OCP Distribution-->
+      <url>http://10.25.28.72:8081/repository/maven-releases/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
