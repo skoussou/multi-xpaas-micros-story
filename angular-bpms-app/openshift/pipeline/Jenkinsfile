@@ -54,7 +54,7 @@ node ("jenkins-slave-nodejs8-maven") {
 
           dir ("${CONTEXT_PATH}") {
 	         // Build, package, test and deploy with custom settings.xml pointing to corporate NEXUS
-                   sh "mvn deploy -s ./openshift/configuration/${SETTINGS_XML_NAME}"
+                   sh "/usr/local/maven/bin/mvn deploy -s ./openshift/configuration/${SETTINGS_XML_NAME}"
 
                  // Capture KJAR GAV Details to use for its download from NEXUS
                  // extract info from pom.xml to build NEXUS_ARTIFACT_PATH
