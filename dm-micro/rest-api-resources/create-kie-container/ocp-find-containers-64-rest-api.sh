@@ -4,4 +4,4 @@ KIE_USERNAME=kieserver
 #KIE_PASSWORD=stelios123!
 KIE_PASSWORD=kieserver123!
 
-curl -X GET -u ${KIE_USERNAME}:${KIE_PASSWORD} "${SERVICE}/kie-server/services/rest/server/containers" -H  "accept: application/xml"
+curl -X GET -u ${KIE_USERNAME}:${KIE_PASSWORD} "${SERVICE}/kie-server/services/rest/server/payments" -H  "accept: application/xml"
