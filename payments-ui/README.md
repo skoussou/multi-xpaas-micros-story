@@ -1,11 +1,15 @@
 # PAYMENTS UI
 
 ## Create Build
+---
 oc new-build --binary=true --image-stream=jboss-eap71-openshift:1.2 --name=payments-ui --allow-missing-images
 oc start-build payments-ui --from-file=/home/stkousso/Stelios/Projects/0047-UAEXchange/uae-workspace/spring-web-uis/spring-webapp-template/target/payments-ui.war
+---
 
 ## Create Deployment Config
-----
+
+DeploymentConfig
+---
 apiVersion: v1
 kind: DeploymentConfig
 metadata:
@@ -81,11 +85,12 @@ spec:
         name: payments-ui:1.0.0
     type: ImageChange
   - type: ConfigChange
-----
+---
 
 ## Create Service
+
 Service for http
-----
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -100,10 +105,10 @@ spec:
     targetPort: 8080
   selector:
     deploymentConfig: ${APPLICATION_NAME}
-----
+---
 
 Service for ping
-----
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -120,7 +125,7 @@ spec:
     port: 8888
   selector:
     deploymentConfig: ${APPLICATION_NAME}
-----
+---
 
 ## Create Service Route
 
