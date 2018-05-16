@@ -51,10 +51,14 @@ public class KieContainerServiceImpl implements KieContainerService {
 	@Inject
 	protected PasswordEncoder passwordEncoder;
 
-	protected String serverUrl = System.getProperty("org.kie.server.url", "http://localhost:8080/kie-server/services/rest/server");
-	protected String user = System.getProperty("org.kie.server.kie.rest.api.user", "stelios");
-	protected String password = System.getProperty("org.kie.server.kie.rest.api.password", "stelios123!");
+//	protected String serverUrl = System.getProperty("org.kie.server.url", "http://localhost:8080/kie-server/services/rest/server");
+//	protected String user = System.getProperty("org.kie.server.kie.rest.api.user", "stelios");
+//	protected String password = System.getProperty("org.kie.server.kie.rest.api.password", "stelios123!");
 
+	protected String serverUrl = System.getProperty("org.kie.server.url", "http://uaex-rules-api-poc.apps.ocp.uaeexchange.com");
+	protected String user = System.getProperty("org.kie.server.kie.rest.api.user", "kieserver");
+	protected String password = System.getProperty("org.kie.server.kie.rest.api.password", "kieserver123!");
+	
 	protected String CONTAINER_ID = System.getProperty("org.kie.server.container", "payments");
 	//protected String processId = System.getProperty("org.kie.server.itest.process", "evaluation");
 
