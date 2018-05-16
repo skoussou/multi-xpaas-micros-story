@@ -6,9 +6,11 @@
   <artifactId>dm-micro</artifactId>
   <version>4.0.0</version>
   <name>dm-micro</name>
-  <!--packaging>kjar</packaging-->
   <description></description>
 
+<properties>
+<version.org.brms-bpmsuite>6.4.9.GA-redhat-2</version.org.brms-bpmsuite>
+</properties>
 
       <!--repositories>
         <repository>
@@ -34,6 +36,37 @@
             </snapshots>
         </pluginRepository>
       </pluginRepositories-->
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.bom.brms</groupId>
+				<artifactId>jboss-brms-bpmsuite-platform-bom</artifactId>
+				<version>${version.org.brms-bpmsuite}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+     	<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.9.redhat-4</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-xc</artifactId>
+			<scope>provided</scope>
+		</dependency> -->
+	</dependencies>
 
   <distributionManagement>
     <repository>

@@ -1,0 +1,1 @@
+{"commands":[{"insert":{"out-identifier":"PAYMENT_APPROVAL1","return-object":true,"entry-point":"DEFAULT","object":{"com.redhat.consulting.domain.InFact":{"paymentValue":990}}}},{"set-global":{"identifier":"resultsList","out-identifier":"resultsList","object":{"java.util.ArrayList":[]}}},{"fire-all-rules":""}]}
