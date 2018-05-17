@@ -1,7 +1,13 @@
 package com.redhat.consulting.domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+@XmlRootElement
 public class InFact {
 
+	
 	private Double paymentValue;
 	
 	public InFact() {

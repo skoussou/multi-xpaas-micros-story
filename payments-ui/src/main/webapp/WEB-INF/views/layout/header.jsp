@@ -10,9 +10,9 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="${pageContext.request.contextPath}\Payees">Payees</a></li>
-				<li class="active"><a href="${pageContext.request.contextPath}\Payments">Bill Payments</a></li>
-				<li class="active"><a href="${pageContext.request.contextPath}\kiecontainer\execRules">Kie-Containers</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}\payees\list">Payees</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}\bills\pay">Bill Payments</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}\kiecontainer\execRules?amount=-1">Kie-Containers</a></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
