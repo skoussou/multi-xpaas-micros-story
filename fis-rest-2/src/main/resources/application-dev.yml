@@ -16,13 +16,19 @@ endpoints:
   health:
     enabled: true 
 
-infinispan:
-  host: ${JDG_SERVICE_NAME}
-  port: ${JDG_SERVICE_PORT}
-  cache-name: ${JDG_CACHE_NAME}
-  username: ${JDG_SERVICE_USERNAME}
-  password: ${JDG_SERVICE_PASSWORD}
+kie:
+  host: ${KIE_SERVICE_NAME}
+  port: ${KIE_SERVICE_PORT}
+  container-id: ${KIE_CONTAINER}
+  username: ${KIE_SERVICE_USERNAME}
+  password: ${KIE_SERVICE_PASSWORD}
   
+activemq:
+  host: ${ACTIVEMQ_SERVICE_NAME}
+  port: ${ACTIVEMQ_SERVICE_PORT}
+  username: ${ACTIVEMQ_BROKER_USERNAME}
+  password: ${ACTIVEMQ_BROKER_PASSWORD}
+
 # The application configuration properties
 quickstart:
   generateOrderPeriod: 2s

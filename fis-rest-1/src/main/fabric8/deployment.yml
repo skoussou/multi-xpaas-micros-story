@@ -1,9 +1,12 @@
+metadata:
+  labels:
+    app: uaex-fis-1
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: vodafone-fis
+        app: uaex-fis-1
     spec:
       containers:
         - 
@@ -21,7 +24,7 @@ spec:
             value: 11333
           - name: JDG_CACHE_NAME
             value: payees
-          - name: JDGL_SERVICE_USERNAME
+          - name: JDG_SERVICE_USERNAME
             value: admin
           - name: JDG_SERVICE_PASSWORD
             value: redhat1!
