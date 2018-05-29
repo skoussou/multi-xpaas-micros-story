@@ -1,16 +1,27 @@
 # PAYMENTS UI
 
+## Create Binary from Source
+[source,bash]
+----
+cd payments-ui
+mvn clean install
+----
+
 ## Create Build
 
 [source,bash]
 ----
+oc login https://[OCP-CLUSTER-DOMAIN]:443 -u USERNAME -p PASSWORD
 oc new-build --binary=true --image-stream=jboss-eap71-openshift:1.2 --name=payments-ui --allow-missing-images
-oc start-build payments-ui --from-file=/home/stkousso/Stelios/Projects/0047-UAEXchange/uae-workspace/spring-web-uis/spring-webapp-template/target/payments-ui.war
+oc start-build payments-ui --from-file=[PATH-TO-LOCAL-GIT-DIR]/multi-xpaas-micros-story/payments-ui/target/payments-ui.war
 ----
 
 ## Create Deployment Config
 
-DeploymentConfig
+create PAYMENTS-UI deployment with the DeploymentConfig
+
+Option 1 - go to Cluster console, changet to project and "Add to project" --> YAML --> copy paste the following deployment source
+Option 2 - Logged in to OCP Cluster and on the project you wish the deployment to be created execute *oc create -f PATH-TO-LOCAL-GIT-DIR]/multi-xpaas-micros-story/payments-ui/openshift/templates/payments-ui-deployment-config.yml*
 
 [source,bash]
 ----
@@ -93,7 +104,12 @@ spec:
 
 ## Create Service
 
-Service for http
+
+
+create PAYMENTS-UI Service for http & ping with following config
+
+Option 1 - go to Cluster console, changet to project and "Add to project" --> YAML --> copy paste the following deployment source
+Option 2 - Logged in to OCP Cluster and on the project you wish the deployment to be created execute *oc create -f PATH-TO-LOCAL-GIT-DIR]/multi-xpaas-micros-story/payments-ui/openshift/templates/payments-ui-service-config.yml*
 
 [source,bash]
 ----
@@ -111,12 +127,6 @@ spec:
     targetPort: 8080
   selector:
     deploymentConfig: ${APPLICATION_NAME}
-----
-
-Service for ping
-
-[source,bash]
-----
 apiVersion: v1
 kind: Service
 metadata:
@@ -134,6 +144,7 @@ spec:
   selector:
     deploymentConfig: ${APPLICATION_NAME}
 ----
+
 
 ## Create Service Route
 
