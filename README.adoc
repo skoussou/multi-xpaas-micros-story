@@ -1,0 +1,7 @@
+# multi-xpaas-micros-story
+A combination of RH OCP xPAAS containers to deploy a microservices story
+
+[source, bash]
+----
+git clone https://github.com/skoussou/multi-xpaas-micros-story.git
+----
