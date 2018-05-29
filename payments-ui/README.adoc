@@ -16,12 +16,13 @@ oc new-build --binary=true --image-stream=jboss-eap71-openshift:1.2 --name=payme
 oc start-build payments-ui --from-file=[PATH-TO-LOCAL-GIT-DIR]/multi-xpaas-micros-story/payments-ui/target/payments-ui.war
 ----
 
+
 ## Create Deployment Config
 
 create PAYMENTS-UI deployment with the DeploymentConfig
 
-Option 1 - go to Cluster console, changet to project and "Add to project" --> YAML --> copy paste the following deployment source
-Option 2 - Logged in to OCP Cluster and on the project you wish the deployment to be created execute *oc create -f PATH-TO-LOCAL-GIT-DIR]/multi-xpaas-micros-story/payments-ui/openshift/templates/payments-ui-deployment-config.yml*
+* Option 1 - go to Cluster console, changet to project and "Add to project" --> YAML --> copy paste the following deployment source
+* Option 2 - Logged in to OCP Cluster and on the project you wish the deployment to be created execute *oc create -f PATH-TO-LOCAL-GIT-DIR]/multi-xpaas-micros-story/payments-ui/openshift/templates/payments-ui-deployment-config.yml*
 
 [source,bash]
 ----
@@ -108,8 +109,8 @@ spec:
 
 create PAYMENTS-UI Service for http & ping with following config
 
-Option 1 - go to Cluster console, changet to project and "Add to project" --> YAML --> copy paste the following deployment source
-Option 2 - Logged in to OCP Cluster and on the project you wish the deployment to be created execute *oc create -f PATH-TO-LOCAL-GIT-DIR]/multi-xpaas-micros-story/payments-ui/openshift/templates/payments-ui-service-config.yml*
+* Option 1 - go to Cluster console, changet to project and "Add to project" --> YAML --> copy paste the following deployment source
+* Option 2 - Logged in to OCP Cluster and on the project you wish the deployment to be created execute *oc create -f PATH-TO-LOCAL-GIT-DIR]/multi-xpaas-micros-story/payments-ui/openshift/templates/payments-ui-service-config.yml*
 
 [source,bash]
 ----
